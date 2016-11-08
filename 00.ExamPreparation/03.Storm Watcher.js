@@ -30,7 +30,33 @@
 
     return Record;
  })();
+/*(function stormWatcher() {
+    let id=0;
+    class Record {
+        constructor(temperature, humidity, pressure, windSpeed) {
+            this.id = id;
+            this.temperature = Number(temperature);
+            this.humidity = Number(humidity);
+            this.pressure = Number(pressure);
+            this.windSpeed = Number(windSpeed);
+            this.weatherType = "";
+            id++;
+        }
+        toString() {
+            if ((this.temperature < 20)
+                && (this.pressure > 900 || this.pressure < 700)
+                && (this.windSpeed > 25)) {
+                this.weatherType = "Stormy";
+            } else {
+                this.weatherType = "Not stormy";
+            }
+            return `{Reading ID: ${this.id}\nTemperature: ${this.temperature}*C\nRelative Humidity: ${this.humidity}%\nPressure: ${this.pressure}hpa\nWind Speed: ${this.windSpeed}m/s\nWeather: ${this.weatherType}}`
+        }
 
+    }
+    return Record;
+
+})();*/
 let record1 = new Record(32, 66, 760, 12);
 let report1 = record1.toString();
 console.log(report1);
