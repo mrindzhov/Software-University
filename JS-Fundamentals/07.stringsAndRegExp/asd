@@ -1,0 +1,39 @@
+function solve2(input) {
+    let CountOfPattern = input[0];
+    CountOfPattern = Number(CountOfPattern) ;
+    let PatternMatrix = input.slice(1, ++CountOfPattern).map(row => row.split(' ').map(Number));
+    let Matrix = input.slice(CountOfPattern, input.length ).map(row => row.split(' ').map(Number));
+
+    --CountOfPattern;
+    let colsize = PatternMatrix[0];
+
+    for(let i = 0; i < Matrix.length; i+= (PatternMatrix.length)) {
+        let row = Matrix[i];
+        for (let j = 0; j < row.length; j += (colsize.length)) {
+
+            for (let m = 0; m < PatternMatrix.length; m++) {
+                let CubeLikePattern = PatternMatrix[m];
+                for (let n = 0; n < CubeLikePattern.length; n++) {
+                    if (Matrix[i + m] != undefined) {
+                        if (Matrix[i + m][j + n] != undefined) {
+                            Matrix[i + m][j + n] = findLetter(PatternMatrix[m][n] + Matrix[i + m][j + n]);
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+    function findLetter(key) {
+        let Alphabet = ' ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        if(key > 27)
+            key = key % 27;
+        else if(key == 27)
+            key = 0;
+        return Alphabet[key];
+    }
+
+    console.log(Matrix.toString().replace(/,/g,''));
+
+}
+// solve2(input);

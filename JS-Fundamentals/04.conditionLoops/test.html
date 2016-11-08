@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<script>
+    function multiplicationTable([a]) {
+        [a] = [a].map(Number);
+        let html="";
+        html+=`<table border="1">\n`;
+        html+=`<tr>\n`;
+        html+=`<th>"x"</th>\n`;
+        for (let i = 1; i <= a; i++) {
+            html+=`<th>`+i+`</th>\n`;
+        }
+        html+=`</tr>\n`;
+        for (let i = 1; i <= a; i++) {
+             html+=`<tr>\n`;
+             html+=`<th>`+i+`</th>\n`;
+            for (let j = 1; j <= a; j++) {
+                html+=`<td>`+j*i+`</td>\n`;
+            }
+            html+=`</tr>\n`;
+        }
+        html+=`</table>\n`;
+    }
+    document.body.multiplicationTableHTML=multiplicationTable(['5']);
+
+</script>
+
+
+</body>
+</html>
