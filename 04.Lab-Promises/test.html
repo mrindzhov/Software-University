@@ -26,64 +26,93 @@
         const kinveyPassword = "p";
         const base64auth = btoa(kinveyUsername + ":" + kinveyPassword);
         const authHeaders = {"Authorization": "Basic " + base64auth};
-        $("#btnLoadPosts").click(loadTitles);
-        $("#btnViewPost").click(viewCurrentPost);
+        
+        $("#btnLoadPosts").click(function () {
+            let request = {
+                url: serviceUrl + '/posts',
+                headers: authHeaders
+            };
+            $.get(request).then(fillSelector).catch(displayError);
+        });
+        $("#btnViewPost").click(loadPost);
+        function fillSelector(posts) {
+            let postSelector = $("#posts");
+            postSelector.empty();
+            for (let post of posts) {
+                postSelector.append($("<option>")
+                    .text(post.title)
+                    .val(post._id));
+            }
+        }
+        function loadPost() {
+            let selectedPostId = $('#posts').val();
+            if (!selectedPostId)return;
+            let postRequest = $.ajax({
+                url: serviceUrl + '/posts/' + selectedPostId,
+                headers: authHeaders
+            });
+            let commentRequest = $.ajax({
+                url: serviceUrl + `/comments/?query={"post_id":"${selectedPostId}"}`,
+                headers: authHeaders
+            });
+            Promise.all([postRequest, commentRequest])
+                .then(displayPost)
+                .catch(displayError);
+        }
+        function displayPost([post,comments]) {
+            $(document.body).find('.new-comment').remove();
+            $(document.body).find('h3').remove();
+            $(document.body).find('.add-comment').remove();
+            $(document.body).find('br').remove();
 
+            $("#post-title").text(post.title);
+            $("#post-body").text(post.body);
+            let commentList = $("#post-comments");
+            commentList.empty();
+            for (let comment of comments) {
+                commentList.append($('<li>')
+                    .text(comment.text)
+                    .append(" ")
+                    .append($("<a href='#'>[Delete]</a>")
+                        .click(function () {
+                            deleteComment(comment._id);
+                        })));
+            }
+            $(document.body).append($("<h3>").text('Add comments'))
+                .append($("<textarea>").addClass('new-comment'))
+                .append($("<br>"))
+                .append($("<button class='add-comment'>").text('Add comment'));
+            $('.add-comment').click(addComment);
+        }
         function addComment() {
-            let newComment = $('#new-comment');
+            let newComment = $('.new-comment');
             let currentPost = $('#posts');
             let newCommentJSON = JSON.stringify({
                 text: newComment.val(),
-                post_id: currentPost.val(),
+                post_id: currentPost.val()
             });
             let request = {
-                method: 'POST',
-                data: newCommentJSON,
+                url: serviceUrl + '/comments',
                 headers: authHeaders,
-                url: serviceUrl + "/comments/"
+                data: newCommentJSON,
+                contentType: "application/json",
+                dataType: 'json'
             };
-            $.ajax(request)
-                    .then(loadComments)
-                    .catch(displayError);
-
+            $.post(request)
+                .then(loadPost)
+                .catch(displayError);
             newComment.val('');
-            currentPost.val('');
         }
-
-        function loadComments() {
-            $('#post-comments').empty();
-            $.get(serviceUrl + "/comments/")
-                    .then(displayComments)
-                    .catch(displayError);
-        }
-        function displayComments(comments) {
-            console.log(comments);
-//            let postSelector = $('#posts');
-//            postSelector.empty();
-//            for (let post of posts) {
-//                let option = $("<option>").text(post.title).val(post._id);
-//                postSelector.append(option);
-//            }
-        }
-        function loadTitles() {
-            let loadPostRequest = {
-                url: serviceUrl + "/posts",
+        function deleteComment(commentId) {
+            let request = {
+                method: 'DELETE',
+                url: serviceUrl + '/comments/' + commentId,
                 headers: authHeaders
             };
-            $.ajax(loadPostRequest)
-                    .then(displayTitles)
-                    .catch(displayError);
+            $.ajax(request)
+                .then(loadPost)
+                .catch(displayError);
         }
-
-        function displayTitles(posts) {
-            let postSelector = $('#posts');
-            postSelector.empty();
-            for (let post of posts) {
-                let option = $("<option>").text(post.title).val(post._id);
-                postSelector.append(option);
-            }
-        }
-
         function displayError(error) {
             let errDiv = $("<div>").text(`Error ${error.status} : (${error.statusText})`);
             $(document.body).prepend(errDiv);
@@ -93,62 +122,6 @@
                 });
             }, 3000);
         }
-
-        function viewCurrentPost() {
-            let selectedPostId = $('#posts').val();
-            if (!selectedPostId)return;
-            let postRequest = $.ajax({
-                url: serviceUrl + "/posts/" + selectedPostId,
-                headers: authHeaders
-            });
-            let commentRequest = $.ajax({
-                url: serviceUrl + `/comments/?query={"post_id":"${selectedPostId}"}`,
-                headers: authHeaders
-            });
-
-            Promise.all([postRequest, commentRequest])
-                    .then(displayPostsWithComments)
-                    .catch(displayError);
-            let comments = $("#post-comments");
-            let headerComment = $('<h3>').text('Add comment');
-            let textArea = $('<textarea>').attr('id', 'new-comment');
-            let btnNewComment = $("<button>Add comment</button>").attr('id', 'btnNewComment');
-            textArea.insertAfter(comments);
-            headerComment.insertAfter(comments);
-            btnNewComment.insertAfter(textArea);
-            $("<br>").insertAfter(textArea);
-            $("#btnNewComment").click(addComment);
-        }
-
-        function displayPostsWithComments([post,commentsArray]) {
-            $('#post-title').text(post.title);
-            $('#post-body').text(post.body);
-            let comments = $("#post-comments");
-            comments.empty();
-            for (let comment of commentsArray) {
-                let commentItem = $("<li>")
-                        .text(comment.text)
-                        .attr("comment-id", comment["_id"]);
-                comments.append(commentItem
-                        .append(" ")
-                        .append($("<a href='#'>[Delete]</a>")
-                                .click(function () {
-                                    deleteComment(comment._id)
-                                })));
-            }
-        }
-
-        function deleteComment(commentId) {
-            let request = {
-                method: 'DELETE',
-                url: serviceUrl + '/comments/' + commentId,
-                headers: authHeaders
-            };
-            $.ajax(request)
-                    .then(viewCurrentPost)
-                    .catch(displayError);
-        }
-
     });
 </script>
 </body>
