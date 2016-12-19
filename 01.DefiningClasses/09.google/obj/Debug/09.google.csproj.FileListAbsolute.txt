@@ -1,0 +1,6 @@
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\DefiningClasses\definePersonClass\09.google\bin\Debug\09.google.exe.config
+C:\Users\Boss\Documents\Visual Studio 2015\Projects\C#OOP\DefiningClasses\definePersonClass\09.google\obj\Debug\09.google.csprojResolveAssemblyReference.cache
+C:\Users\Boss\Documents\Visual Studio 2015\Projects\C#OOP\DefiningClasses\definePersonClass\09.google\bin\Debug\09.google.exe
+C:\Users\Boss\Documents\Visual Studio 2015\Projects\C#OOP\DefiningClasses\definePersonClass\09.google\bin\Debug\09.google.pdb
+C:\Users\Boss\Documents\Visual Studio 2015\Projects\C#OOP\DefiningClasses\definePersonClass\09.google\obj\Debug\09.google.exe
+C:\Users\Boss\Documents\Visual Studio 2015\Projects\C#OOP\DefiningClasses\definePersonClass\09.google\obj\Debug\09.google.pdb
