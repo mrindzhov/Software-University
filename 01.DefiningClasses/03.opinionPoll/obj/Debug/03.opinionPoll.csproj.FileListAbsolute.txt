@@ -1,0 +1,5 @@
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\DefiningClasses\definePersonClass\03.opinionPoll\bin\Debug\03.opinionPoll.exe.config
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\DefiningClasses\definePersonClass\03.opinionPoll\bin\Debug\03.opinionPoll.exe
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\DefiningClasses\definePersonClass\03.opinionPoll\bin\Debug\03.opinionPoll.pdb
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\DefiningClasses\definePersonClass\03.opinionPoll\obj\Debug\03.opinionPoll.exe
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\DefiningClasses\definePersonClass\03.opinionPoll\obj\Debug\03.opinionPoll.pdb

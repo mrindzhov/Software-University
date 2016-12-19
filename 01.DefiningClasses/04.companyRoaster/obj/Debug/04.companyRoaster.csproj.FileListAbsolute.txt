@@ -1,0 +1,6 @@
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\DefiningClasses\definePersonClass\04.companyRoaster\bin\Debug\04.companyRoaster.exe.config
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\DefiningClasses\definePersonClass\04.companyRoaster\bin\Debug\04.companyRoaster.exe
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\DefiningClasses\definePersonClass\04.companyRoaster\bin\Debug\04.companyRoaster.pdb
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\DefiningClasses\definePersonClass\04.companyRoaster\obj\Debug\04.companyRoaster.exe
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\DefiningClasses\definePersonClass\04.companyRoaster\obj\Debug\04.companyRoaster.pdb
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\DefiningClasses\definePersonClass\04.companyRoaster\obj\Debug\04.companyRoaster.csprojResolveAssemblyReference.cache
