@@ -1,0 +1,5 @@
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\04.numberInReverse\bin\Debug\04.numberInReverse.exe.config
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\04.numberInReverse\bin\Debug\04.numberInReverse.exe
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\04.numberInReverse\bin\Debug\04.numberInReverse.pdb
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\04.numberInReverse\obj\Debug\04.numberInReverse.exe
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\04.numberInReverse\obj\Debug\04.numberInReverse.pdb

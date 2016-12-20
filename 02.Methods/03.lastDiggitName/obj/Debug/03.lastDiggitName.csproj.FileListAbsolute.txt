@@ -1,0 +1,6 @@
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\03.lastDiggitName\bin\Debug\03.lastDiggitName.exe.config
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\03.lastDiggitName\bin\Debug\03.lastDiggitName.exe
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\03.lastDiggitName\bin\Debug\03.lastDiggitName.pdb
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\03.lastDiggitName\obj\Debug\03.lastDiggitName.csprojResolveAssemblyReference.cache
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\03.lastDiggitName\obj\Debug\03.lastDiggitName.exe
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\03.lastDiggitName\obj\Debug\03.lastDiggitName.pdb

@@ -1,0 +1,6 @@
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\06.primeChecker\bin\Debug\06.primeChecker.exe.config
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\06.primeChecker\bin\Debug\06.primeChecker.exe
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\06.primeChecker\bin\Debug\06.primeChecker.pdb
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\06.primeChecker\obj\Debug\06.primeChecker.csprojResolveAssemblyReference.cache
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\06.primeChecker\obj\Debug\06.primeChecker.exe
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\06.primeChecker\obj\Debug\06.primeChecker.pdb
