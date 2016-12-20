@@ -1,0 +1,6 @@
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\12.printPeople\bin\Debug\12.printPeople.exe.config
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\12.printPeople\bin\Debug\12.printPeople.exe
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\12.printPeople\bin\Debug\12.printPeople.pdb
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\12.printPeople\obj\Debug\12.printPeople.csprojResolveAssemblyReference.cache
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\12.printPeople\obj\Debug\12.printPeople.exe
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\12.printPeople\obj\Debug\12.printPeople.pdb

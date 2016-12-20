@@ -1,0 +1,5 @@
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\13.drawingTool\bin\Debug\13.drawingTool.exe.config
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\13.drawingTool\bin\Debug\13.drawingTool.exe
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\13.drawingTool\bin\Debug\13.drawingTool.pdb
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\13.drawingTool\obj\Debug\13.drawingTool.exe
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\13.drawingTool\obj\Debug\13.drawingTool.pdb

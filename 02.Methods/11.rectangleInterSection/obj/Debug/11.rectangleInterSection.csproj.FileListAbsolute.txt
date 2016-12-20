@@ -1,0 +1,5 @@
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\11.rectangleInterSection\bin\Debug\11.rectangleInterSection.exe.config
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\11.rectangleInterSection\bin\Debug\11.rectangleInterSection.exe
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\11.rectangleInterSection\bin\Debug\11.rectangleInterSection.pdb
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\11.rectangleInterSection\obj\Debug\11.rectangleInterSection.exe
+c:\users\boss\documents\visual studio 2015\Projects\C#OOP\02.Methods\11.rectangleInterSection\obj\Debug\11.rectangleInterSection.pdb
