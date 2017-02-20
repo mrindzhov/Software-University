@@ -1,2 +1,4 @@
-# JS-Advanced-All-Exercises-And-Labs
-100% Solved
+# JS-Advanced- October 2016 @ SoftUni
+(JavaScript Core, Part 2)
+
+https://softuni.bg/trainings/1486/js-advanced-october-2016
