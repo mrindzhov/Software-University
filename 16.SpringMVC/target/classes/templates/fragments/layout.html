@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--Thymeleaf template engine reference-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8" />
+    <!--/*@thymesVar id="pageTitle" type="templates"*/-->
+    <title th:if="${pageTitle}" th:text="${pageTitle}"></title>
+    <link th:href="@{css/site.css}" rel="stylesheet" />
+</head>
+<body>
+    <header th:fragment="site-header" >
+        <div th:class="header">
+            Spring MVC
+            <a href="/" th:class="header-link">Home</a>
+            <a href="/date" th:class="header-link">Date</a>
+            <a href="/nakov/new/hello" th:class="header-link">Nakov</a>
+            <a href="/hello" th:class="header-link">Hello</a>
+            <a href="/greeting" th:class="header-link">Greeting</a>
+            <a href="/numbers" th:class="header-link">Numbers</a>
+            <a href="/numbersplus" th:class="header-link">Numbers+</a>
+            <a href="/files" th:class="header-link">Files</a>
+            <a href="/filesplus" th:class="header-link">Files+</a>
+        </div>
+    </header>
+    <main th:fragment="main" th:class="main">
+        Main Fragment
+    </main>
+    <footer th:fragment="site-footer" >
+        <div th:class="footer">
+            &copy; SotUni 2016
+        </div>
+    </footer>
+</body>
+</html>
