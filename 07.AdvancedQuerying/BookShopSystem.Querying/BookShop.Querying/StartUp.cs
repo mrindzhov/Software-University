@@ -2,7 +2,9 @@
 {
     using BookShopSystem.Data;
     using System;
+    using System.Data.SqlClient;
     using System.Linq;
+
     class StartUp
     {
         static void Main(string[] args)
@@ -188,6 +190,30 @@
             //Console.WriteLine(ctx.SaveChanges() + " books were deleted");
             #endregion
 
+            #region 16.	Stored Procedure
+                #region Procedure in MSSQL
+            //            create PROCEDURE GetBooksCountByAuthor
+            //    (@firstName varchar(30), @lastName Varchar(30))
+            //As
+            //Begin
+            //select COUNT(*) from Books
+            //where AuthorId = (
+            //    Select Id from Authors as a
+            //              where a.FirstName = @firstName and a.LastName = @lastName)
+            //End   
+            #endregion
+            Console.Write("Enter author first and last name: ");
+            string[] names = Console.ReadLine().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            SqlParameter param1 = new SqlParameter("@firstName", names[0]);
+            SqlParameter param2 = new SqlParameter("@lastName", names[1]);
+
+            int result = ctx.Database
+                .SqlQuery<int>("exec dbo.GetBooksCountByAuthor @firstName, @lastName", param1, param2)
+                .First();
+
+            Console.WriteLine($"{names[0]} {names[1]} has written {result} books");
+            #endregion
 
         }
     }
