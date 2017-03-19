@@ -1,9 +1,6 @@
 ﻿namespace PhotoShare.Client.Core.Commands
 {
     using System;
-
-    using Models;
-    using Client;
     using Services;
 
     public class RegisterUserCommand
@@ -27,9 +24,12 @@
             {
                 throw new ArgumentException("Passwords do not match!");
             }
-
+            if (this.userservice.IsUsernameExisting(username))
+            {
+                throw new InvalidOperationException($"Username [{username}] is already taken!");
+            } 
            
-            this.userservice.AddUser(username,password,email);
+            this.userservice.RegisterUser(username,password,email);
            
             return "User " + username + " was registered successfully!";
         }

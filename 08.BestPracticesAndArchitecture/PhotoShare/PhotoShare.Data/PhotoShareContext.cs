@@ -1,15 +1,16 @@
-namespace PhotoShare.Client
+namespace PhotoShare.Data
 {
     using System.Data.Entity;
 
     using Models;
 
-    using PhotoShare.Client.Migrations;
+    using Migrations;
 
     public class PhotoShareContext : DbContext
     { 
         public PhotoShareContext() : base("name=PhotoShareContext")
         {
+            this.Configuration.LazyLoadingEnabled = false;
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<PhotoShareContext, Configuration>());
         }
 

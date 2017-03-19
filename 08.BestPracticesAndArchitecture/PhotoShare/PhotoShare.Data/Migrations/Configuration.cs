@@ -1,9 +1,9 @@
-namespace PhotoShare.Client.Migrations
+namespace PhotoShare.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
 
-    using Client;
+
     using Models;
 
     internal class Configuration : DbMigrationsConfiguration<PhotoShareContext>
