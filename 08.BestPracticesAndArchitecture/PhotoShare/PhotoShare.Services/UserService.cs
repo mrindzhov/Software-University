@@ -28,7 +28,7 @@
             }
         }
 
-        public List<String> GetUserFriends(string username)
+        public List<string> GetUserFriends(string username)
         {
             using (PhotoShareContext context = new PhotoShareContext())
             {
@@ -49,9 +49,8 @@
         {
             using (PhotoShareContext context = new PhotoShareContext())
             {
-                //TODO
-                return context.Users.SingleOrDefault(u => u.Username == username)
-                    .Friends.Any(u => u.Username == username2);
+                return context.Users.SingleOrDefault(u=>u.Username==username).Friends
+                            .Any(u => u.Username == username2);
             }
         }
 
@@ -64,7 +63,9 @@
 
                 user.Friends.Add(user2);
                 user2.Friends.Add(user);
+
                 context.SaveChanges();
+
             }
         }
 
