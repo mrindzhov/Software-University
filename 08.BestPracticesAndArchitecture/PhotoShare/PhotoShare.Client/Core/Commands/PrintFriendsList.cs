@@ -27,7 +27,7 @@
             {
                 return "No friends for this user!";
             }
-            return $"User {username} \n{String.Join("\n", friends)}";
+            return $"Friends for {username}: \n{String.Join("\n", friends)}";
         }
     }
 }

@@ -18,6 +18,7 @@
             UserService userService = new UserService();
             TownService townService = new TownService();
             AlbumService albumService = new AlbumService();
+            PictureService pictureService = new PictureService();
             switch (cmdName)
             {
                 case "RegisterUser":
@@ -27,6 +28,14 @@
                 case "CreateAlbum":
                     CreateAlbumCommand createAlbum = new CreateAlbumCommand(albumService, userService,tagService);
                     result = createAlbum.Execute(commandParameters);
+                    break;
+                case "ShareAlbum":
+                    ShareAlbumCommand shareAlbum = new ShareAlbumCommand(albumService, userService);
+                    result = shareAlbum.Execute(commandParameters);
+                    break;
+                case "UploadPicture":
+                    UploadPictureCommand uploadPicture = new UploadPictureCommand(albumService, pictureService);
+                    result = uploadPicture.Execute(commandParameters);
                     break;
                 case "AddTown":
                     AddTownCommand addTown = new AddTownCommand(townService);
@@ -61,7 +70,7 @@
                     result = exit.Execute();
                     break;
                 default:
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"Command < {cmdName} > not valid!");
             }
             return result;
         }

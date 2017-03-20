@@ -10,7 +10,7 @@ namespace PhotoShare.Data
     { 
         public PhotoShareContext() : base("name=PhotoShareContext")
         {
-            this.Configuration.LazyLoadingEnabled = false;
+          //  this.Configuration.LazyLoadingEnabled = false;
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<PhotoShareContext, Configuration>());
         }
 
