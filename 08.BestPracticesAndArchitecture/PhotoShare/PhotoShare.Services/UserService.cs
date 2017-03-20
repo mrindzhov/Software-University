@@ -55,11 +55,20 @@
             }
         }
 
+        public bool IsOwnerForAlbum(int userId, int albumId)
+        {
+            using (PhotoShareContext context = new PhotoShareContext())
+            {
+                return context.AlbumRoles
+                    .Any(albr => albr.Album.Id == albumId && albr.Role == 0 && albr.User.Id == userId);
+            }
+        }
+
         public bool AreFriends(string username, string username2)
         {
             using (PhotoShareContext context = new PhotoShareContext())
             {
-                return context.Users.SingleOrDefault(u=>u.Username==username).Friends
+                return context.Users.SingleOrDefault(u => u.Username == username).Friends
                             .Any(u => u.Username == username2);
             }
         }
@@ -79,7 +88,7 @@
             }
         }
 
-        public void deleteUser(string username)
+        public void DeleteUser(string username)
         {
             using (PhotoShareContext context = new PhotoShareContext())
             {

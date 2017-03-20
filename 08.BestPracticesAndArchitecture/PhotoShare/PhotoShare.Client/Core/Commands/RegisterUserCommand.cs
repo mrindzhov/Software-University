@@ -15,6 +15,10 @@
         // RegisterUser <username> <password> <repeat-password> <email>
         public string Execute(string[] data)
         {
+            if (AuthenticationManager.IsAuthenticated())
+            {
+                throw new InvalidOperationException("Invalid credentials!");
+            }
             string username = data[0];
             string password = data[1];
             string repeatPassword = data[2];

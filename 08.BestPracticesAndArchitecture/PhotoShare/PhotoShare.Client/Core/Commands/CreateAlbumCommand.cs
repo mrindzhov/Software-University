@@ -23,6 +23,10 @@
 
         public string Execute(string[] commandParameters)
         {
+            if (!AuthenticationManager.IsAuthenticated())
+            {
+                throw new InvalidOperationException("Log in in order to create albums!");
+            }
             string username = commandParameters[0];
             string albumTitle = commandParameters[1];
             string BgColor = commandParameters[2];

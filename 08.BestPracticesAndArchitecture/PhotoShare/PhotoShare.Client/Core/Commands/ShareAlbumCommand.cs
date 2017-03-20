@@ -23,6 +23,11 @@
 
         public string Execute(string[] data)
         {
+            if (!AuthenticationManager.IsAuthenticated())
+            {
+                throw new InvalidOperationException("Log in in order to share albums!");
+            }
+
             int albumId = int.Parse(data[0]);
             string username = data[1];
             string permission = data[2];
@@ -32,11 +37,17 @@
                 throw new ArgumentException($"Album {albumId} not found!");
             }
 
-            string albumName = this.albumService.GetAlbumById(albumId);
+            Album album = this.albumService.GetAlbumById(albumId);
             if (!this.userService.IsUsernameExisting(username))
             {
                 throw new ArgumentException($"User {username} not found!");
             }
+            
+            if (!this.userService.IsOwnerForAlbum(AuthenticationManager.GetCurrentUser().Id, albumId))
+            {
+                throw new InvalidOperationException("You can only share your albums!");
+            }
+
             Role role;
             bool isRoleValid = Enum.TryParse(permission, out role);
 
@@ -47,13 +58,13 @@
 
             if (this.albumService.isRoleExistingForUser(username, albumId, role))
             {
-                throw new ArgumentException($"User {username} already has role in album {albumName}!");
+                throw new ArgumentException($"User {username} already has role in album {album.Name}!");
             }
 
 
             this.albumService.ShareAlbum(albumId, username, role);
 
-            return $"Username {username} added to album {albumName} ({permission})";
+            return $"Username {username} added to album {album.Name} ({permission})";
         }
     }
 }

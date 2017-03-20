@@ -24,6 +24,10 @@
         // !!! Cannot change username
         public string Execute(string[] data)
         {
+            if (!AuthenticationManager.IsAuthenticated())
+            {
+                throw new InvalidOperationException("Login in order to add friends!");
+            }
             string username = data[0];
             string property = data[1];
             string value = data[2];
@@ -32,11 +36,17 @@
             {
                 throw new ArgumentException($"Username {username} not found!");
             }
+
             User userToUpdate = this.userService.GetUserByUsername(username);
 
+
+            if (AuthenticationManager.GetCurrentUser().Username != username)
+            {
+                throw new InvalidOperationException("You can only modify your own profile!");
+            }
             if (property == "Password")
             {
-                if (!value.Any(c => char.IsLower(c)) && value.Any(c => char.IsDigit(c)))
+                if (!(value.Any(c => char.IsLower(c)) && value.Any(c => char.IsDigit(c))))
                 {
                     throw new ArgumentException("Invalid password!");
                 }

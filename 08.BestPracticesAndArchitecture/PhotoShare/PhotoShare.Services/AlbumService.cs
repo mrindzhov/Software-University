@@ -3,6 +3,7 @@
     using Data;
     using Models;
     using System.Linq;
+    using System;
 
     public class AlbumService
     {
@@ -31,11 +32,11 @@
             }
         }
 
-        public string GetAlbumById(int albumId)
+        public Album GetAlbumById(int albumId)
         {
             using (PhotoShareContext context = new PhotoShareContext())
             {
-                return context.Albums.SingleOrDefault(alb => alb.Id == albumId).Name;
+                return context.Albums.SingleOrDefault(alb => alb.Id == albumId);
             }
         }
 

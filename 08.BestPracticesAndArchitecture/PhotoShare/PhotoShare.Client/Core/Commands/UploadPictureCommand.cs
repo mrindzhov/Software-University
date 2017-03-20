@@ -18,9 +18,18 @@
 
         public string Execute(string[] data)
         {
+            if (!AuthenticationManager.IsAuthenticated())
+            {
+                throw new InvalidOperationException("Log in in order to upload pictures!");
+            }
             string albumName = data[0];
             string pictureTitle = data[1];
             string pictureFilePath = data[2];
+
+
+            //TO DO: •	Upload picture (only if he is owner of the album that picture is uploaded to)
+
+
 
             if (!this.albumService.IsAlbumExisting(albumName))
             {

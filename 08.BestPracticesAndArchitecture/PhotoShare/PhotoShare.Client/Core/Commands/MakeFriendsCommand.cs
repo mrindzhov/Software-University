@@ -15,9 +15,17 @@
         // MakeFriends <username1> <username2>
         public string Execute(string[] data)
         {
+            if (!AuthenticationManager.IsAuthenticated())
+            {
+                throw new InvalidOperationException("Log in in order to add friends!");
+            }
             string username = data[0];
             string username2 = data[1];
 
+            if (AuthenticationManager.GetCurrentUser().Username != username)
+            {
+                throw new InvalidOperationException("You can only add friends to yourself!");
+            }
             if (!this.userService.IsUsernameExisting(username))
             {
                 throw new ArgumentException($"{username} not found!");
@@ -26,6 +34,7 @@
             {
                 throw new ArgumentException($"{username2} not found!");
             }
+
 
             if (this.userService.AreFriends(username, username2))
             {

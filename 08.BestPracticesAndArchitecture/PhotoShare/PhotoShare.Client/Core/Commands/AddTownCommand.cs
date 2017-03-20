@@ -15,6 +15,11 @@
         // AddTown <townName> <countryName>
         public string Execute(string[] data)
         {
+            if (!AuthenticationManager.IsAuthenticated())
+            {
+                throw new InvalidOperationException("Log in in order to add town!");
+            }
+
             string townName = data[0];
             string country = data[1];
             if (this.townService.IsTownExisting(townName))

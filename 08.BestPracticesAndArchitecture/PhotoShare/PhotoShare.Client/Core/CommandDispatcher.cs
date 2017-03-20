@@ -21,7 +21,7 @@
             PictureService pictureService = new PictureService();
             switch (cmdName)
             {
-                case "LoginUser":
+                case "Login":
                     LoginUserCommand loginUser = new LoginUserCommand(userService);
                     result = loginUser.Execute(commandParameters);
                     break;
@@ -33,7 +33,6 @@
                     LogoutCommand logout = new LogoutCommand();
                     result = logout.Execute();
                     break;
-
                 case "CreateAlbum":
                     CreateAlbumCommand createAlbum = new CreateAlbumCommand(albumService, userService,tagService);
                     result = createAlbum.Execute(commandParameters);

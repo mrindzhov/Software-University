@@ -16,6 +16,11 @@
         // AddTag <tag>
         public string Execute(string[] data)
         {
+            if (!AuthenticationManager.IsAuthenticated())
+            {
+                throw new InvalidOperationException("Log in in order to add tags!");
+            }
+
             string tag = data[0].ValidateOrTransform();
             if (this.tagService.IsTagExisting(tag))
             {
@@ -24,7 +29,7 @@
 
             this.tagService.AddTag(tag);
                 
-            return tag + " was added successfully to database!";
+            return "Tag "+tag + " was added successfully to database!";
         }
     }
 }
