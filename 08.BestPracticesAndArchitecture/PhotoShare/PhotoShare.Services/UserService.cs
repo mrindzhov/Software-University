@@ -28,6 +28,16 @@
             }
         }
 
+        public bool HasUser(string username, string password)
+        {
+            using (PhotoShareContext context = new PhotoShareContext())
+            {
+                return context.Users.
+                    Any(u => u.Username == username && u.Password == password);
+
+            }
+        }
+
         public List<string> GetUserFriends(string username)
         {
             using (PhotoShareContext context = new PhotoShareContext())
