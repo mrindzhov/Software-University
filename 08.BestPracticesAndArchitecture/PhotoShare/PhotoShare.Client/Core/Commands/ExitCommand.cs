@@ -4,16 +4,14 @@
 
     public class ExitCommand
     {
-        public string Execute()
+        public void Execute()
         {
             if (AuthenticationManager.IsAuthenticated())
             {
                 AuthenticationManager.Logout();
             }
+            Console.WriteLine("Good bye!");
             Environment.Exit(0);
-            return "Bye-bye";
-
-
         }
     }
 }

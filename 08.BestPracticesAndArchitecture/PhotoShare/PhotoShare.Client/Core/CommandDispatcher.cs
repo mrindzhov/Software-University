@@ -75,7 +75,7 @@
                     break;
                 case "Exit":
                     ExitCommand exit= new ExitCommand();
-                    result = exit.Execute();
+                    exit.Execute();
                     break;
                 default:
                     throw new NotImplementedException($"Command < {cmdName} > not valid!");
