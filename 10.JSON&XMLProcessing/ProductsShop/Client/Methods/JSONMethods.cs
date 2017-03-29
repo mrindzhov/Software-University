@@ -1,4 +1,4 @@
-﻿namespace Client
+﻿namespace Client.Methods
 {
     using Data;
     using Models;
@@ -8,21 +8,23 @@
     using System.IO;
     using System.Linq;
 
-    class StartUp
+    public static class JSONMethods
     {
-        static void Main(string[] args)
-        {
-            ProductsShopContext ctx = new ProductsShopContext();
-            //SeedData(ctx);
-            //QueryAndExportData(ctx);
-        }
 
-        private static void QueryAndExportData(ProductsShopContext ctx)
+        public static void ExportData(ProductsShopContext ctx)
         {
             ExportUsersAndProducts(ctx);
             ExportCategoriesByProductsCount(ctx);
             ExportUsersWithSells(ctx);
             ExportProductsInRangeToJSON(ctx);
+        }
+
+        public static void SeedData(ProductsShopContext ctx)
+        {
+            SeedUsers(ctx);
+            SeedProducts(ctx);
+            SeedCategories(ctx);
+            ctx.SaveChanges();
         }
 
         private static void ExportUsersAndProducts(ProductsShopContext ctx)
@@ -107,14 +109,6 @@
             System.IO.File.WriteAllText("../../../Export-Json/products-in-range.json", json);
         }
 
-        private static void SeedData(ProductsShopContext ctx)
-        {
-            SeedUsers(ctx);
-            SeedProducts(ctx);
-            SeedCategories(ctx);
-            ctx.SaveChanges();
-        }
-
         private static void SeedCategories(ProductsShopContext ctx)
         {
             string jsonFile = File.ReadAllText("../../../Import-Json-Resources/categories.json");
@@ -122,11 +116,12 @@
 
             int productsCount = ctx.Products.Count();
             Random rnd = new Random();
+            var products = ctx.Products;
             foreach (Category category in categories)
             {
                 for (int i = 0; i < productsCount / 3; i++)
                 {
-                    Product product = ctx.Products.Find(rnd.Next(1, productsCount + 1));
+                    Product product = products.Find(rnd.Next(1, productsCount + 1));
                     category.Products.Add(product);
                 }
             }
@@ -142,13 +137,15 @@
             IEnumerable<Product> products = JsonConvert.DeserializeObject<IEnumerable<Product>>(jsonFile);
 
             Random rand = new Random();
+            int usersCount = ctx.Users.Count();
+
             foreach (Product product in products)
             {
                 double shouldHaveBuyer = rand.NextDouble();
-                product.SellerId = rand.Next(1, ctx.Users.Count() + 1);
+                product.SellerId = rand.Next(1, usersCount + 1);
                 if (shouldHaveBuyer <= 0.9)
                 {
-                    product.BuyerId = rand.Next(1, ctx.Users.Count() + 1);
+                    product.BuyerId = rand.Next(1, usersCount + 1);
                 }
             }
 

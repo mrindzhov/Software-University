@@ -1,4 +1,4 @@
-﻿namespace CarDealer.Client
+﻿namespace CarDealer.Client.Methods
 {
     using Models;
     using Data;
@@ -8,19 +8,9 @@
     using System.Linq;
     using Newtonsoft.Json;
 
-    class StartUp
+    public class JSONMethods
     {
-        static void Main(string[] args)
-        {
-            CarDealerContext ctx = new CarDealerContext();
-            //ctx.Database.Initialize(true);
-
-            ImportData(ctx);
-            ExportData(ctx);
-
-        }
-
-        private static void ImportData(CarDealerContext ctx)
+        public static void ImportData(CarDealerContext ctx)
         {
             ImportSuppliersDataFromJSON(ctx);
             ImportPartsDataFromJSON(ctx);
@@ -29,7 +19,7 @@
             ImportSalesRecords(ctx);
         }
 
-        private static void ExportData(CarDealerContext ctx)
+        public static void ExportData(CarDealerContext ctx)
         {
             ExportCustomersTotalSales(ctx);
 
