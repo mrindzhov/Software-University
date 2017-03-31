@@ -13,7 +13,7 @@
         //If the user is actually the creator of the team – add him/her directly!
         public string Execute(string[] args)
         {
-            Check.CheckLength(2, args);
+            Check.Length(2, args);
             AuthenticationManager.Authorize();
             string teamName = args[0];
             string username = args[1];

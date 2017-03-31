@@ -10,7 +10,7 @@
     {
         public string Execute(string[] inputArgs)
         {
-            Check.CheckLength(1, inputArgs);
+            Check.Length(1, inputArgs);
             AuthenticationManager.Authorize();
 
             string teamName = inputArgs[0];

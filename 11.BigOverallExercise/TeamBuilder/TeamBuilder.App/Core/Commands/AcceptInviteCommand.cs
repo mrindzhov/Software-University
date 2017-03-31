@@ -12,7 +12,7 @@
         //Checks current user’s active invites and accepts the one from the team specified.
         public string Execute(string[] args)
         {
-            Check.CheckLength(1, args);
+            Check.Length(1, args);
             AuthenticationManager.Authorize();
             string teamName = args[0];
 

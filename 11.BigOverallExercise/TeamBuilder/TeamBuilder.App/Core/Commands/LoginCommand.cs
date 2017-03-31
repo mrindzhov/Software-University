@@ -9,7 +9,7 @@
     {
         public string Execute(string[] args)
         {
-            Check.CheckLength(2, args);
+            Check.Length(2, args);
             string username = args[0];
             string password = args[1];
             if (AuthenticationManager.IsAuthenticated())

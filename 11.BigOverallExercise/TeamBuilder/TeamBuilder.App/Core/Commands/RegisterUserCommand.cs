@@ -10,7 +10,7 @@
         // •	RegisterUser <username> <password> <repeat-password> <firstName> <lastName> <age> <gender>
         public string Execute(string[] args)
         {
-            Check.CheckLength(7, args);
+            Check.Length(7, args);
             //if (AuthenticationManager.IsAuthenticated())
             //{
             //    throw new InvalidOperationException(Constants.ErrorMessages.LogoutFirst);

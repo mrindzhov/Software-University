@@ -11,7 +11,7 @@
     {
         public string Execute(string[] args)
         {
-            Check.CheckLength(1, args);
+            Check.Length(1, args);
 
             string eventName = args[0];
             if (!CommandHelper.IsEventExisting(eventName))

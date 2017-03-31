@@ -10,7 +10,7 @@
     {
         public string Execute(string[] inputArgs)
         {
-            Check.CheckLength(2, inputArgs);
+            Check.Length(2, inputArgs);
             AuthenticationManager.Authorize();
             string eventName = inputArgs[0];
             if (!CommandHelper.IsEventExisting(eventName))

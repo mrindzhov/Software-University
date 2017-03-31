@@ -7,7 +7,7 @@
     {
         public string Execute(string[] args)
         {
-            Check.CheckLength(0, args);
+            Check.Length(0, args);
             Environment.Exit(0);
             return "Bye";
         }

@@ -11,7 +11,7 @@
         //•	CreateEvent<name> <description> <startDate> <endDate>
         public string Execute(string[] args)
         {
-            Check.CheckLength(6, args);
+            Check.Length(6, args);
             AuthenticationManager.Authorize();
 
             string name = args[0];

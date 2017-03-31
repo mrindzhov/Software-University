@@ -12,7 +12,7 @@
         //Removes specified user member from given team.Only the creator of the team can kick other members.
         public string Execute(string[] inputArgs)
         {
-            Check.CheckLength(2, inputArgs);
+            Check.Length(2, inputArgs);
             AuthenticationManager.Authorize();
 
             string teamName = inputArgs[0];
