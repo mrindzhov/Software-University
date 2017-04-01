@@ -1,13 +1,14 @@
 ﻿namespace TeamBuilder.App.Core.Commands
 {
     using Models;
+    using TeamBuilder.App.Interfaces;
     using TeamBuilder.App.Utilities;
 
-    public class LogoutCommand
+    public class LogoutCommand : IExecutable
     {
         public string Execute(string[] args)
         {
-            Check.Length(0, args);
+            Validator.CheckLength(0, args);
             AuthenticationManager.Authorize();
 
             User currentUser = AuthenticationManager.GetCurrentUser();

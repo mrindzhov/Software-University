@@ -4,13 +4,14 @@
     using System.Linq;
     using Data;
     using Models;
+    using TeamBuilder.App.Interfaces;
     using Utilities;
 
-    public class DisbandCommand
+    public class DisbandCommand : IExecutable
     {
         public string Execute(string[] inputArgs)
         {
-            Check.Length(1, inputArgs);
+            Validator.CheckLength(1, inputArgs);
             AuthenticationManager.Authorize();
 
             string teamName = inputArgs[0];

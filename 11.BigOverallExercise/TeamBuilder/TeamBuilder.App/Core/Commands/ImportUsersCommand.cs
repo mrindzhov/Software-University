@@ -5,17 +5,18 @@
     using System.IO;
     using System.Linq;
     using System.Xml.Linq;
+    using TeamBuilder.App.Interfaces;
     using TeamBuilder.App.Utilities;
     using TeamBuilder.Data;
     using TeamBuilder.Models;
 
-    public class ImportUsersCommand
+    public class ImportUsersCommand : IExecutable
     {
         //•	ImportUsers<filePathToXmlFile>
         //Import users from given xml file.
         public string Execute(string[] args)
         {
-            Check.Length(1, args);
+            Validator.CheckLength(1, args);
 
             string filePath = args[0];
             if (!File.Exists(filePath))
@@ -62,7 +63,7 @@
                     string lastName = u.Element("last-name")?.Value;
                     int age = Convert.ToInt32(u.Element("age").Value);
                     Gender gender;
-                    bool IsGender = Enum.TryParse(Check.FirstLetterToUpper(u.Element("gender").Value), out gender);
+                    bool IsGender = Enum.TryParse(Validator.FirstLetterToUpper(u.Element("gender").Value), out gender);
                     users.Add(new User
                     {
                         Username = username,

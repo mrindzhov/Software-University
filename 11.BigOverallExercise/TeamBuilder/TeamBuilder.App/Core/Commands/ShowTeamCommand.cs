@@ -5,13 +5,14 @@
     using System.Text;
     using Data;
     using Models;
+    using TeamBuilder.App.Interfaces;
     using Utilities;
 
-    public class ShowTeamCommand
+    public class ShowTeamCommand : IExecutable
     {
         public string Execute(string[] args)
         {
-            Check.Length(1, args);
+            Validator.CheckLength(1, args);
 
             string teamName = args[0];
             if (!CommandHelper.IsTeamExisting(teamName))

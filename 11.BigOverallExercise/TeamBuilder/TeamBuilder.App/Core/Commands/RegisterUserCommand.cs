@@ -4,13 +4,14 @@
     using Utilities;
     using System.Linq;
     using Models;
+    using TeamBuilder.App.Interfaces;
 
-    public class RegisterUserCommand
+    public class RegisterUserCommand : IExecutable
     {
         // •	RegisterUser <username> <password> <repeat-password> <firstName> <lastName> <age> <gender>
         public string Execute(string[] args)
         {
-            Check.Length(7, args);
+            Validator.CheckLength(7, args);
             //if (AuthenticationManager.IsAuthenticated())
             //{
             //    throw new InvalidOperationException(Constants.ErrorMessages.LogoutFirst);

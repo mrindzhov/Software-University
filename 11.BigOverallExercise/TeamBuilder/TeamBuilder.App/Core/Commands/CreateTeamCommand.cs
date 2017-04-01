@@ -2,9 +2,10 @@
 {
     using System;
     using Data;
+    using TeamBuilder.App.Interfaces;
     using Utilities;
 
-    public class CreateTeamCommand
+    public class CreateTeamCommand : IExecutable
     {
         //•	CreateTeam<name> <acronym> <description>
         public string Execute(string[] args)

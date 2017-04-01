@@ -1,15 +1,17 @@
 ﻿namespace TeamBuilder.App.Core.Commands
 {
     using System;
+    using TeamBuilder.App.Interfaces;
     using Utilities;
 
-    public class ExitCommand
+    public class ExitCommand : IExecutable
     {
         public string Execute(string[] args)
         {
-            Check.Length(0, args);
+            Validator.CheckLength(0, args);
+            Console.WriteLine("Bye!");
             Environment.Exit(0);
-            return "Bye";
+            return string.Empty;
         }
     }
 }

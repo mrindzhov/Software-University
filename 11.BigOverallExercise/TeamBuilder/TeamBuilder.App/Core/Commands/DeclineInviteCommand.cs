@@ -1,28 +1,19 @@
 ﻿namespace TeamBuilder.App.Core.Commands
 {
-    using System;
     using System.Linq;
     using Data;
     using Models;
+    using TeamBuilder.App.Interfaces;
     using Utilities;
 
-    public class DeclineInviteCommand
+    public class DeclineInviteCommand : IExecutable
     {
         public string Execute(string[] args)
         {
-            Check.Length(1, args);
+            Validator.CheckLength(1, args);
             AuthenticationManager.Authorize();
             string teamName = args[0];
-
-            if (!CommandHelper.IsTeamExisting(teamName))
-            {
-                throw new ArgumentException(string.Format(Constants.ErrorMessages.TeamNotFound, teamName));
-            }
-
-            if (!CommandHelper.IsInviteExisting(teamName, AuthenticationManager.GetCurrentUser()))
-            {
-                throw new ArgumentException(string.Format(Constants.ErrorMessages.InviteNotFound, teamName));
-            }
+            Validator.ValidateInvitation(teamName, AuthenticationManager.GetCurrentUser());
             this.DeclineInvitation(teamName);
 
             return $"Invite from {teamName} declined!!";

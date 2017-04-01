@@ -4,12 +4,13 @@
     using Utilities;
     using Data;
     using Models;
+    using TeamBuilder.App.Interfaces;
 
-    public class DeleteUserCommand
+    public class DeleteUserCommand : IExecutable
     {
         public string Execute(string[] args)
         {
-            Check.Length(0, args);
+            Validator.CheckLength(0, args);
             AuthenticationManager.Authorize();
 
             User user = AuthenticationManager.GetCurrentUser();

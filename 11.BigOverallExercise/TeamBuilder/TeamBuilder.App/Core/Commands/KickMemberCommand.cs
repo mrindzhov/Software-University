@@ -4,15 +4,16 @@
     using System.Linq;
     using Data;
     using Models;
+    using TeamBuilder.App.Interfaces;
     using Utilities;
 
-    public class KickMemberCommand
+    public class KickMemberCommand : IExecutable
     {
         //•	KickMember<teamName> <username>
         //Removes specified user member from given team.Only the creator of the team can kick other members.
         public string Execute(string[] inputArgs)
         {
-            Check.Length(2, inputArgs);
+            Validator.CheckLength(2, inputArgs);
             AuthenticationManager.Authorize();
 
             string teamName = inputArgs[0];

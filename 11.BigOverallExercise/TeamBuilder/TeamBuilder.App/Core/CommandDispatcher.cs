@@ -14,6 +14,13 @@
             string commandName = inputArgs.Length > 0 ? inputArgs[0] : string.Empty;
             inputArgs = inputArgs.Skip(1).ToArray();
 
+            result = GetResultWithReflection(inputArgs, commandName);
+
+            return result;
+        }
+
+        private static string GetResultWithReflection(string[] inputArgs, string commandName)
+        {
             // Get command's type.
             Type commandType = Type.GetType("TeamBuilder.App.Core.Commands." + commandName + "Command");
 
@@ -31,9 +38,7 @@
 
             // Invoke the method we found passing the instance of the command and
             // array of all expected arguments that the method should take when it is invoked.
-            result = executeMethod.Invoke(command, new object[] { inputArgs }) as string;
-
-            return result;
+            return executeMethod.Invoke(command, new object[] { inputArgs }) as string;
         }
     }
 }

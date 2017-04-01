@@ -5,13 +5,14 @@
     using Utilities;
     using Data;
     using Models;
+    using TeamBuilder.App.Interfaces;
 
-    public class CreateEventCommand
+    public class CreateEventCommand : IExecutable
     {
         //•	CreateEvent<name> <description> <startDate> <endDate>
         public string Execute(string[] args)
         {
-            Check.Length(6, args);
+            Validator.CheckLength(6, args);
             AuthenticationManager.Authorize();
 
             string name = args[0];

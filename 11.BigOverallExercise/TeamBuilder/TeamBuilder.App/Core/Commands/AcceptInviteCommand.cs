@@ -1,36 +1,27 @@
 ﻿namespace TeamBuilder.App.Core.Commands
 {
-    using System;
     using System.Linq;
     using Data;
     using Models;
+    using TeamBuilder.App.Interfaces;
     using Utilities;
 
-    public class AcceptInviteCommand
+    public class AcceptInviteCommand : IExecutable
     {
-        //•	AcceptInvite <teamName>
+        //•	AcceptInvite <teamName> 
         //Checks current user’s active invites and accepts the one from the team specified.
         public string Execute(string[] args)
         {
-            Check.Length(1, args);
+            Validator.CheckLength(1, args);
             AuthenticationManager.Authorize();
             string teamName = args[0];
+            Validator.ValidateInvitation(teamName, AuthenticationManager.GetCurrentUser());
 
-            if (!CommandHelper.IsTeamExisting(teamName))
-            {
-                throw new ArgumentException(string.Format(Constants.ErrorMessages.TeamNotFound, teamName));
-            }
-
-            if (!CommandHelper.IsInviteExisting(teamName, AuthenticationManager.GetCurrentUser()))
-            {
-                throw new ArgumentException(string.Format(Constants.ErrorMessages.InviteNotFound, teamName));
-            }
             this.AcceptInvitation(teamName);
 
             return $"User {AuthenticationManager.GetCurrentUser().Username} joined team {teamName}!";
 
         }
-
         private void AcceptInvitation(string teamName)
         {
             using (TeamBuilderContext ctx = new TeamBuilderContext())

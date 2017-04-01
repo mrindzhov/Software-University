@@ -1,19 +1,19 @@
 ﻿namespace TeamBuilder.App.Core.Commands
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using Newtonsoft.Json;
+    using TeamBuilder.App.Interfaces;
     using TeamBuilder.App.Utilities;
     using TeamBuilder.Data;
     using TeamBuilder.Models;
 
-    public class ExportTeamCommand
+    public class ExportTeamCommand : IExecutable
     {
         public string Execute(string[] args)
         {
-            Check.Length(1, args);
+            Validator.CheckLength(1, args);
 
             string teamName = args[0];
 

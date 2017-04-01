@@ -3,13 +3,14 @@
     using System;
     using System.Linq;
     using Data;
+    using TeamBuilder.App.Interfaces;
     using TeamBuilder.Models;
     using Utilities;
-    public class LoginCommand
+    public class LoginCommand : IExecutable
     {
         public string Execute(string[] args)
         {
-            Check.Length(2, args);
+            Validator.CheckLength(2, args);
             string username = args[0];
             string password = args[1];
             if (AuthenticationManager.IsAuthenticated())

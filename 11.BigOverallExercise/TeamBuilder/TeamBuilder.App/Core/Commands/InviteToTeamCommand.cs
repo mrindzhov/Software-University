@@ -5,15 +5,16 @@
     using Utilities;
     using Data;
     using Models;
+    using TeamBuilder.App.Interfaces;
 
-    public class InviteToTeamCommand
+    public class InviteToTeamCommand : IExecutable
     {
         //•	InviteToTeam <teamName> <username>
         //        Sends an invite to the specified user to join given team.
         //If the user is actually the creator of the team – add him/her directly!
         public string Execute(string[] args)
         {
-            Check.Length(2, args);
+            Validator.CheckLength(2, args);
             AuthenticationManager.Authorize();
             string teamName = args[0];
             string username = args[1];

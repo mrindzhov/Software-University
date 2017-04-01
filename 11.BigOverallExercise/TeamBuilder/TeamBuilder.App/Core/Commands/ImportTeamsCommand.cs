@@ -5,15 +5,16 @@
     using System.IO;
     using System.Linq;
     using System.Xml.Linq;
+    using TeamBuilder.App.Interfaces;
     using TeamBuilder.App.Utilities;
     using TeamBuilder.Data;
     using TeamBuilder.Models;
 
-    public class ImportTeamsCommand
+    public class ImportTeamsCommand : IExecutable
     {
         public string Execute(string[] args)
         {
-            Check.Length(1, args);
+            Validator.CheckLength(1, args);
 
             string filePath = args[0];
             if (!File.Exists(filePath))
