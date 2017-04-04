@@ -6,6 +6,7 @@
     using Data;
     using Models;
     using TeamBuilder.App.Interfaces;
+    using TeamBuilder.Data.Repositories;
     using Utilities;
 
     public class ShowEventCommand : IExecutable
@@ -25,9 +26,10 @@
         private string LoadEvent(string eventName)
         {
             StringBuilder sb = new StringBuilder();
-            using (TeamBuilderContext ctx = new TeamBuilderContext())
+            using (var uf = new UnitOfWork())
             {
-                Event ev = ctx.Events.Include("ParticipatingTeams").OrderByDescending(e => e.StartDate).FirstOrDefault(e => e.Name == eventName);
+                Event ev = uf.Events.Include("ParticipatingTeams").OrderByDescending(e => e.StartDate)
+                    .FirstOrDefault(e => e.Name == eventName);
                 sb.AppendLine($"{ev.Name} {ev.StartDate} {ev.EndDate} {ev.Description}");
                 sb.AppendLine($"Teams: {ev.ParticipatingTeams.Count()}");
                 foreach (var team in ev.ParticipatingTeams)
@@ -39,6 +41,20 @@
                     }
                 }
             }
+            //using (TeamBuilderContext ctx = new TeamBuilderContext())
+            //{
+            //    Event ev = ctx.Events.Include("ParticipatingTeams").OrderByDescending(e => e.StartDate).FirstOrDefault(e => e.Name == eventName);
+            //    sb.AppendLine($"{ev.Name} {ev.StartDate} {ev.EndDate} {ev.Description}");
+            //    sb.AppendLine($"Teams: {ev.ParticipatingTeams.Count()}");
+            //    foreach (var team in ev.ParticipatingTeams)
+            //    {
+            //        sb.AppendLine($"--{team.Name}, Members: {team.Members.Count}");
+            //        foreach (var member in team.Members)
+            //        {
+            //            sb.AppendLine($"----{member.Username} {member.Age}");
+            //        }
+            //    }
+            //}
             return sb.ToString().Trim();
         }
     }

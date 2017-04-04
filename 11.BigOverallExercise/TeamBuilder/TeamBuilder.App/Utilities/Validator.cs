@@ -34,7 +34,6 @@
 
             return str.ToUpper();
         }
-        //TODO add more checkers .... should be static only
 
         public static void ValidateAddTeamToEvent(string eventName, string teamName, int currentUserId)
         {
@@ -42,8 +41,6 @@
             {
                 throw new ArgumentException(string.Format(Constants.ErrorMessages.EventNotFound, eventName));
             }
-
-
             if (!CommandHelper.IsTeamExisting(teamName))
             {
                 throw new ArgumentException(string.Format(Constants.ErrorMessages.TeamNotFound, teamName));

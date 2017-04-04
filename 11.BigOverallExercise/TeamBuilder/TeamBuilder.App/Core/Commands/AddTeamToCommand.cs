@@ -2,9 +2,10 @@
 {
     using System;
     using System.Linq;
-    using Data;
     using Models;
     using TeamBuilder.App.Interfaces;
+    using TeamBuilder.Data;
+    using TeamBuilder.Data.Repositories;
     using Utilities;
 
     public class AddTeamToCommand : IExecutable
@@ -23,10 +24,10 @@
        
         private void AddTeamToEvent(string teamName, string eventName)
         {
-            using (TeamBuilderContext context = new TeamBuilderContext())
+            using (var uf = new UnitOfWork())
             {
-                Team team = context.Teams.FirstOrDefault(t => t.Name == teamName);
-                Event ev = context.Events.Where(e => e.Name == eventName).OrderByDescending(e => e.StartDate).First();
+                Team team = uf.Teams.GetByName(t => t.Name == teamName);
+                Event ev = uf.Events.Include("Creator").Where(e => e.Name == eventName).OrderByDescending(e => e.StartDate).First();
 
                 if (ev.ParticipatingTeams.Any(t => t.Name == teamName) || team.ParticipatedEvents.Any(e => e.Id == ev.Id))
                 {
@@ -35,8 +36,22 @@
 
                 ev.ParticipatingTeams.Add(team);
                 team.ParticipatedEvents.Add(ev);
-                context.SaveChanges();
+                uf.Commit();
             }
+            //using (TeamBuilderContext context = new TeamBuilderContext())
+            //{
+            //    Team team = context.Teams.FirstOrDefault(t => t.Name == teamName);
+            //    Event ev = context.Events.Where(e => e.Name == eventName).OrderByDescending(e => e.StartDate).First();
+
+            //    if (ev.ParticipatingTeams.Any(t => t.Name == teamName) || team.ParticipatedEvents.Any(e => e.Id == ev.Id))
+            //    {
+            //        throw new InvalidOperationException(Constants.ErrorMessages.CannotAddSameTeamTwice);
+            //    }
+
+            //    ev.ParticipatingTeams.Add(team);
+            //    team.ParticipatedEvents.Add(ev);
+            //    context.SaveChanges();
+            //}
         }
     }
 }

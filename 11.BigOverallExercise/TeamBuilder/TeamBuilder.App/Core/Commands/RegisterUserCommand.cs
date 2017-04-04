@@ -5,6 +5,7 @@
     using System.Linq;
     using Models;
     using TeamBuilder.App.Interfaces;
+    using TeamBuilder.Data.Repositories;
 
     public class RegisterUserCommand : IExecutable
     {
@@ -67,18 +68,24 @@
                 Gender = gender
             };
             this.RegisterUser(u);
-           // AuthenticationManager.LoginUser(u);
+            // AuthenticationManager.LoginUser(u);
 
             return $"User {username} successfully registered!";
         }
 
         private void RegisterUser(User user)
         {
-            using (Data.TeamBuilderContext ctx = new Data.TeamBuilderContext())
+            using (var uf = new UnitOfWork())
             {
-                ctx.Users.Add(user);
-                ctx.SaveChanges();
+                uf.Users.Add(user);
+                uf.Commit();
             }
+
+            //using (Data.TeamBuilderContext ctx = new Data.TeamBuilderContext())
+            //{
+            //    ctx.Users.Add(user);
+            //    ctx.SaveChanges();
+            //}
         }
 
     }

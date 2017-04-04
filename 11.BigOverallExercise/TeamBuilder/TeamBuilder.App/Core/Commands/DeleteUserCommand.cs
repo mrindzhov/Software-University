@@ -5,6 +5,7 @@
     using Data;
     using Models;
     using TeamBuilder.App.Interfaces;
+    using TeamBuilder.Data.Repositories;
 
     public class DeleteUserCommand : IExecutable
     {
@@ -24,11 +25,16 @@
 
         private static void DeleteUser(User user)
         {
-            using (TeamBuilderContext ctx = new TeamBuilderContext())
+            using (var uf = new UnitOfWork())
             {
-                ctx.Users.SingleOrDefault(u => u.Id == user.Id).IsDeleted = true;
-                ctx.SaveChanges();
+                uf.Users.GetById(u => u.Id == user.Id).IsDeleted = true;
+                uf.Commit();
             }
+            //using (TeamBuilderContext ctx = new TeamBuilderContext())
+            //{
+            //    ctx.Users.SingleOrDefault(u => u.Id == user.Id).IsDeleted = true;
+            //    ctx.SaveChanges();
+            //}
         }
     }
 }

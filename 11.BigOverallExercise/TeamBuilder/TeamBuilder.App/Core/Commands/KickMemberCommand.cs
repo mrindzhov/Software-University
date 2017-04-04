@@ -5,6 +5,7 @@
     using Data;
     using Models;
     using TeamBuilder.App.Interfaces;
+    using TeamBuilder.Data.Repositories;
     using Utilities;
 
     public class KickMemberCommand : IExecutable
@@ -47,14 +48,22 @@
 
         private void KickMember(string teamName, string username)
         {
-            using (TeamBuilderContext context = new TeamBuilderContext())
+            using (var uf = new UnitOfWork())
             {
-                Team team = context.Teams.FirstOrDefault(t => t.Name == teamName);
-                User user = context.Users.FirstOrDefault(u => u.Username == username);
+                Team team = uf.Teams.GetByName(t => t.Name == teamName);
+                User user = uf.Users.GetByName(u => u.Username == username);
 
                 team.Members.Remove(user);
-                context.SaveChanges();
+                uf.Commit();
             }
+            //using (TeamBuilderContext context = new TeamBuilderContext())
+            //{
+            //    Team team = context.Teams.FirstOrDefault(t => t.Name == teamName);
+            //    User user = context.Users.FirstOrDefault(u => u.Username == username);
+
+            //    team.Members.Remove(user);
+            //    context.SaveChanges();
+            //}
         }
     }
 }

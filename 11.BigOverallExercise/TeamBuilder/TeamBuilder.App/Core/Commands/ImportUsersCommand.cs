@@ -8,6 +8,7 @@
     using TeamBuilder.App.Interfaces;
     using TeamBuilder.App.Utilities;
     using TeamBuilder.Data;
+    using TeamBuilder.Data.Repositories;
     using TeamBuilder.Models;
 
     public class ImportUsersCommand : IExecutable
@@ -40,43 +41,40 @@
 
         private void AddUsers(ICollection<User> users)
         {
-            using (TeamBuilderContext ctx = new TeamBuilderContext())
+            using (var uf = new UnitOfWork())
             {
-                ctx.Users.AddRange(users);
-                ctx.SaveChanges();
+                uf.Users.AddRange(users);
+                uf.Commit();
             }
         }
 
         private ICollection<User> GetUsersFromXml(string filePath)
         {
             ICollection<User> users = new HashSet<User>();
-            using (TeamBuilderContext ctx = new TeamBuilderContext())
-            {
-                //current path=>  "../../Import/users.xml"
-                XDocument xmlData = XDocument.Load(filePath);
+            //current path=>  "../../Import/users.xml"
+            XDocument xmlData = XDocument.Load(filePath);
 
-                xmlData.Root.Elements().ToList().ForEach(u =>
+            xmlData.Root.Elements().ToList().ForEach(u =>
+            {
+                string username = u.Element("username")?.Value;
+                string password = u.Element("password")?.Value;
+                string firstName = u.Element("first-name")?.Value;
+                string lastName = u.Element("last-name")?.Value;
+                int age = Convert.ToInt32(u.Element("age").Value);
+                Gender gender;
+                bool IsGender = Enum.TryParse(Validator.FirstLetterToUpper(u.Element("gender").Value), out gender);
+                users.Add(new User
                 {
-                    string username = u.Element("username")?.Value;
-                    string password = u.Element("password")?.Value;
-                    string firstName = u.Element("first-name")?.Value;
-                    string lastName = u.Element("last-name")?.Value;
-                    int age = Convert.ToInt32(u.Element("age").Value);
-                    Gender gender;
-                    bool IsGender = Enum.TryParse(Validator.FirstLetterToUpper(u.Element("gender").Value), out gender);
-                    users.Add(new User
-                    {
-                        Username = username,
-                        Password = password,
-                        FirstName = firstName,
-                        LastName = lastName,
-                        Age = age,
-                        Gender = gender
-                    });
+                    Username = username,
+                    Password = password,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    Age = age,
+                    Gender = gender
                 });
-            }
+            });
+
             return users;
         }
-
     }
 }

@@ -7,6 +7,7 @@
     using TeamBuilder.App.Interfaces;
     using TeamBuilder.App.Utilities;
     using TeamBuilder.Data;
+    using TeamBuilder.Data.Repositories;
     using TeamBuilder.Models;
 
     public class ExportTeamCommand : IExecutable
@@ -44,10 +45,14 @@
 
         private Team GetTeamWithMembersByName(string teamName)
         {
-            using (TeamBuilderContext ctx = new TeamBuilderContext())
+            using (var uf = new UnitOfWork())
             {
-                return ctx.Teams.Include("Members").FirstOrDefault(t => t.Name == teamName);
+                return uf.Teams.Include("Members").FirstOrDefault(t => t.Name == teamName);   
             }
+            //using (TeamBuilderContext ctx = new TeamBuilderContext())
+            //{
+            //    return ctx.Teams.Include("Members").FirstOrDefault(t => t.Name == teamName);
+            //}
         }
     }
 }

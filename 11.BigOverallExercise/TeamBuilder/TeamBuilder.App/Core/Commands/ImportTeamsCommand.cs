@@ -8,6 +8,7 @@
     using TeamBuilder.App.Interfaces;
     using TeamBuilder.App.Utilities;
     using TeamBuilder.Data;
+    using TeamBuilder.Data.Repositories;
     using TeamBuilder.Models;
 
     public class ImportTeamsCommand : IExecutable
@@ -38,41 +39,45 @@
 
         private void AddTeams(ICollection<Team> teams)
         {
-            using (TeamBuilderContext ctx = new TeamBuilderContext())
+            using (var uf = new UnitOfWork())
             {
-                ctx.Teams.AddRange(teams);
-                ctx.SaveChanges();
+                uf.Teams.AddRange(teams);
+                uf.Commit();
             }
+            //using (TeamBuilderContext ctx = new TeamBuilderContext())
+            //{
+            //    ctx.Teams.AddRange(teams);
+            //    ctx.SaveChanges();
+            //}
         }
 
         private ICollection<Team> GetTeamsFromXml(string filePath)
         {
             ICollection<Team> teams = new HashSet<Team>();
-            using (TeamBuilderContext ctx = new TeamBuilderContext())
+
+            //current path=>  "../../Import/users.xml"
+            XDocument xmlData = XDocument.Load(filePath);
+
+            xmlData.Root.Elements().ToList().ForEach(u =>
             {
-                //current path=>  "../../Import/users.xml"
-                XDocument xmlData = XDocument.Load(filePath);
+                //                name > Fay - DuBuque </ name >
+                //< acronym > OBJ </ acronym >
+                //< description > Etiam pretium iaculis justo.</ description >
 
-                xmlData.Root.Elements().ToList().ForEach(u =>
+                //   < creator - id > 72 </ creator - id >
+                string name = u.Element("name").Value;
+                string acronym = u.Element("acronym").Value;
+                string description = u.Element("description").Value;
+                int creatorId = int.Parse(u.Element("creator-id").Value);
+                teams.Add(new Team
                 {
-                    //                name > Fay - DuBuque </ name >
-                    //< acronym > OBJ </ acronym >
-                    //< description > Etiam pretium iaculis justo.</ description >
-
-                    //   < creator - id > 72 </ creator - id >
-                    string name = u.Element("name").Value;
-                    string acronym = u.Element("acronym").Value;
-                    string description = u.Element("description").Value;
-                    int creatorId = int.Parse(u.Element("creator-id").Value);
-                    teams.Add(new Team
-                    {
-                        Name = name,
-                        Acronym = acronym,
-                        Description = description,
-                        CreatorId = creatorId
-                    });
+                    Name = name,
+                    Acronym = acronym,
+                    Description = description,
+                    CreatorId = creatorId
                 });
-            }
+            });
+
             return teams;
         }
 

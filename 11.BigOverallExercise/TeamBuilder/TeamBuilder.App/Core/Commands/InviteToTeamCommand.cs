@@ -6,6 +6,7 @@
     using Data;
     using Models;
     using TeamBuilder.App.Interfaces;
+    using TeamBuilder.Data.Repositories;
 
     public class InviteToTeamCommand : IExecutable
     {
@@ -38,10 +39,10 @@
 
         private void SendInvitation(string teamName, string username)
         {
-            using (TeamBuilderContext ctx = new TeamBuilderContext())
+            using (var uf = new UnitOfWork())
             {
-                Team team = ctx.Teams.FirstOrDefault(t => t.Name == teamName);
-                User user = ctx.Users.FirstOrDefault(u => u.Username == username);
+                Team team = uf.Teams.GetByName(t => t.Name == teamName);
+                User user = uf.Users.GetByName(u => u.Username == username);
                 Invitation inv = new Invitation
                 {
                     TeamId = team.Id,
@@ -52,9 +53,26 @@
                     inv.IsActive = false;
                     team.Members.Add(user);
                 }
-                ctx.Invitations.Add(inv);
-                ctx.SaveChanges();
+                uf.Invitations.Add(inv);
+                uf.Commit();
             }
+            //using (TeamBuilderContext ctx = new TeamBuilderContext())
+            //{
+            //    Team team = ctx.Teams.FirstOrDefault(t => t.Name == teamName);
+            //    User user = ctx.Users.FirstOrDefault(u => u.Username == username);
+            //    Invitation inv = new Invitation
+            //    {
+            //        TeamId = team.Id,
+            //        InvitedUserId = user.Id
+            //    };
+            //    if (team.CreatorId == user.Id)
+            //    {
+            //        inv.IsActive = false;
+            //        team.Members.Add(user);
+            //    }
+            //    ctx.Invitations.Add(inv);
+            //    ctx.SaveChanges();
+            //}
         }
     }
 }

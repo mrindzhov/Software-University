@@ -3,6 +3,7 @@
     using System;
     using Data;
     using TeamBuilder.App.Interfaces;
+    using TeamBuilder.Data.Repositories;
     using Utilities;
 
     public class CreateTeamCommand : IExecutable
@@ -38,17 +39,29 @@
 
         private void AddTeam(string teamName, string acronym, string description)
         {
-            using (TeamBuilderContext ctx = new TeamBuilderContext())
+
+            using (var uf = new UnitOfWork())
             {
-                ctx.Teams.Add(new Models.Team
+                uf.Teams.Add(new Models.Team
                 {
                     Name = teamName,
                     Acronym = acronym,
                     Description = description,
                     CreatorId = AuthenticationManager.GetCurrentUser().Id
                 });
-                ctx.SaveChanges();
+                uf.Commit();
             }
+            //using (TeamBuilderContext ctx = new TeamBuilderContext())
+            //{
+            //    ctx.Teams.Add(new Models.Team
+            //    {
+            //        Name = teamName,
+            //        Acronym = acronym,
+            //        Description = description,
+            //        CreatorId = AuthenticationManager.GetCurrentUser().Id
+            //    });
+            //    ctx.SaveChanges();
+            //}
         }
 
     }

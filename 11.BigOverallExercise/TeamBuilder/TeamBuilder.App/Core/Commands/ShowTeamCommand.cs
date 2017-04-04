@@ -6,6 +6,7 @@
     using Data;
     using Models;
     using TeamBuilder.App.Interfaces;
+    using TeamBuilder.Data.Repositories;
     using Utilities;
 
     public class ShowTeamCommand : IExecutable
@@ -25,9 +26,9 @@
         private string LoadTeamAndMembers(string teamName)
         {
             StringBuilder sb = new StringBuilder();
-            using (TeamBuilderContext ctx = new TeamBuilderContext())
+            using (var uf = new UnitOfWork())
             {
-                Team team = ctx.Teams.FirstOrDefault(t => t.Name == teamName);
+                Team team = uf.Teams.GetByName(t => t.Name == teamName);
                 sb.AppendLine($"{team.Name} {team.Acronym}");
 
                 sb.AppendLine($"Members: {team.Members.Count()}");
@@ -36,6 +37,17 @@
                     sb.AppendLine($"--{member.Username}");
                 }
             }
+            //using (TeamBuilderContext ctx = new TeamBuilderContext())
+            //{
+            //    Team team = ctx.Teams.FirstOrDefault(t => t.Name == teamName);
+            //    sb.AppendLine($"{team.Name} {team.Acronym}");
+
+            //    sb.AppendLine($"Members: {team.Members.Count()}");
+            //    foreach (var member in team.Members)
+            //    {
+            //        sb.AppendLine($"--{member.Username}");
+            //    }
+            //}
             return sb.ToString().Trim();
         }
     }

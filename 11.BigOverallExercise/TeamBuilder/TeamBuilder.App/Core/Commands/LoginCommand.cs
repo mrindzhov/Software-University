@@ -4,6 +4,7 @@
     using System.Linq;
     using Data;
     using TeamBuilder.App.Interfaces;
+    using TeamBuilder.Data.Repositories;
     using TeamBuilder.Models;
     using Utilities;
     public class LoginCommand : IExecutable
@@ -31,10 +32,14 @@
 
         private User GetUserByCredentials(string username, string password)
         {
-            using (TeamBuilderContext ctx = new TeamBuilderContext())
+            using (var uf = new UnitOfWork())
             {
-                return ctx.Users.FirstOrDefault(u => u.Username == username && u.Password == password && u.IsDeleted == false);
+                return uf.Users.FirstOrDefault(u => u.Username == username && u.Password == password && u.IsDeleted == false);
             }
+            //using (TeamBuilderContext ctx = new TeamBuilderContext())
+            //{
+            //    return ctx.Users.FirstOrDefault(u => u.Username == username && u.Password == password && u.IsDeleted == false);
+            //}
         }
     }
 }

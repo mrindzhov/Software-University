@@ -3,9 +3,9 @@
     using System;
     using System.Globalization;
     using Utilities;
-    using Data;
     using Models;
     using TeamBuilder.App.Interfaces;
+    using TeamBuilder.Data.Repositories;
 
     public class CreateEventCommand : IExecutable
     {
@@ -50,9 +50,9 @@
 
         private void CreateEvent(string name, string description, DateTime startDate, DateTime endDate)
         {
-            using (TeamBuilderContext ctx = new TeamBuilderContext())
+            using (var uf = new UnitOfWork())
             {
-                ctx.Events.Add(new Event
+                uf.Events.Add(new Event
                 {
                     Name = name,
                     Description = description,
@@ -60,8 +60,21 @@
                     EndDate = endDate,
                     CreatorId = AuthenticationManager.GetCurrentUser().Id
                 });
-                ctx.SaveChanges();
+                uf.Commit();
             }
+
+            //using (TeamBuilderContext ctx = new TeamBuilderContext())
+            //{
+            //    ctx.Events.Add(new Event
+            //    {
+            //        Name = name,
+            //        Description = description,
+            //        StartDate = startDate,
+            //        EndDate = endDate,
+            //        CreatorId = AuthenticationManager.GetCurrentUser().Id
+            //    });
+            //    ctx.SaveChanges();
+            //}
         }
     }
 }
