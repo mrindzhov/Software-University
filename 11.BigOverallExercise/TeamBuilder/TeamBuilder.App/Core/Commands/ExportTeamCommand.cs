@@ -6,8 +6,7 @@
     using Newtonsoft.Json;
     using TeamBuilder.App.Interfaces;
     using TeamBuilder.App.Utilities;
-    using TeamBuilder.Data;
-    using TeamBuilder.Data.Repositories;
+    using TeamBuilder.App.Repositories;
     using TeamBuilder.Models;
 
     public class ExportTeamCommand : IExecutable
@@ -24,7 +23,7 @@
             }
             Team team = this.GetTeamWithMembersByName(teamName);
 
-            string path=this.ExportTeam(team);
+            string path = this.ExportTeam(team);
 
             return $"Team {teamName} exported to {path}!";
 
@@ -47,12 +46,8 @@
         {
             using (var uf = new UnitOfWork())
             {
-                return uf.Teams.Include("Members").FirstOrDefault(t => t.Name == teamName);   
+                return uf.Teams.Include("Members").FirstOrDefault(t => t.Name == teamName);
             }
-            //using (TeamBuilderContext ctx = new TeamBuilderContext())
-            //{
-            //    return ctx.Teams.Include("Members").FirstOrDefault(t => t.Name == teamName);
-            //}
         }
     }
 }

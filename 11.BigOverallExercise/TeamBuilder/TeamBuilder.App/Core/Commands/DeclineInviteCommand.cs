@@ -1,10 +1,8 @@
 ﻿namespace TeamBuilder.App.Core.Commands
 {
-    using System.Linq;
-    using Data;
     using Models;
     using TeamBuilder.App.Interfaces;
-    using TeamBuilder.Data.Repositories;
+    using TeamBuilder.App.Repositories;
     using Utilities;
 
     public class DeclineInviteCommand : IExecutable
@@ -33,16 +31,6 @@
                     .IsActive = false;
                 uf.Commit();
             }
-            //using (TeamBuilderContext ctx = new TeamBuilderContext())
-            //{
-            //    int currentUserId = AuthenticationManager.GetCurrentUser().Id;
-            //    User user = ctx.Users.FirstOrDefault(u => u.Id == currentUserId);
-            //    Team team = ctx.Teams.FirstOrDefault(t => t.Name == teamName);
-            //    ctx.Invitations
-            //        .FirstOrDefault(i => i.TeamId == team.Id && i.InvitedUserId == user.Id && i.IsActive)
-            //        .IsActive = false;
-            //    ctx.SaveChanges();
-            //}
         }
     }
 }

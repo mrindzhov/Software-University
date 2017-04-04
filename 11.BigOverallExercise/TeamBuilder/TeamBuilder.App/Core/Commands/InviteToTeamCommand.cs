@@ -1,12 +1,10 @@
 ﻿namespace TeamBuilder.App.Core.Commands
 {
     using System;
-    using System.Linq;
     using Utilities;
-    using Data;
     using Models;
     using TeamBuilder.App.Interfaces;
-    using TeamBuilder.Data.Repositories;
+    using TeamBuilder.App.Repositories;
 
     public class InviteToTeamCommand : IExecutable
     {
@@ -56,23 +54,6 @@
                 uf.Invitations.Add(inv);
                 uf.Commit();
             }
-            //using (TeamBuilderContext ctx = new TeamBuilderContext())
-            //{
-            //    Team team = ctx.Teams.FirstOrDefault(t => t.Name == teamName);
-            //    User user = ctx.Users.FirstOrDefault(u => u.Username == username);
-            //    Invitation inv = new Invitation
-            //    {
-            //        TeamId = team.Id,
-            //        InvitedUserId = user.Id
-            //    };
-            //    if (team.CreatorId == user.Id)
-            //    {
-            //        inv.IsActive = false;
-            //        team.Members.Add(user);
-            //    }
-            //    ctx.Invitations.Add(inv);
-            //    ctx.SaveChanges();
-            //}
         }
     }
 }

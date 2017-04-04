@@ -5,7 +5,7 @@
     using System.Linq;
     using Models;
     using TeamBuilder.App.Interfaces;
-    using TeamBuilder.Data.Repositories;
+    using TeamBuilder.App.Repositories;
 
     public class RegisterUserCommand : IExecutable
     {
@@ -80,12 +80,6 @@
                 uf.Users.Add(user);
                 uf.Commit();
             }
-
-            //using (Data.TeamBuilderContext ctx = new Data.TeamBuilderContext())
-            //{
-            //    ctx.Users.Add(user);
-            //    ctx.SaveChanges();
-            //}
         }
 
     }

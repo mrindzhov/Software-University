@@ -1,11 +1,9 @@
 ﻿namespace TeamBuilder.App.Core.Commands
 {
     using System;
-    using System.Linq;
-    using Data;
     using Models;
     using TeamBuilder.App.Interfaces;
-    using TeamBuilder.Data.Repositories;
+    using TeamBuilder.App.Repositories;
     using Utilities;
 
     public class KickMemberCommand : IExecutable
@@ -56,14 +54,6 @@
                 team.Members.Remove(user);
                 uf.Commit();
             }
-            //using (TeamBuilderContext context = new TeamBuilderContext())
-            //{
-            //    Team team = context.Teams.FirstOrDefault(t => t.Name == teamName);
-            //    User user = context.Users.FirstOrDefault(u => u.Username == username);
-
-            //    team.Members.Remove(user);
-            //    context.SaveChanges();
-            //}
         }
     }
 }

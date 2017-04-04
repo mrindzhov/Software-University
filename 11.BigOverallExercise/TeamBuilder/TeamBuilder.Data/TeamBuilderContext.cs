@@ -1,4 +1,4 @@
-namespace TeamBuilder.Data
+namespace TeamBuilder.App
 {
     using System.Data.Entity;
     using Configurations;

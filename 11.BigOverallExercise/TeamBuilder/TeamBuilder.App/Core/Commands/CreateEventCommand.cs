@@ -5,7 +5,7 @@
     using Utilities;
     using Models;
     using TeamBuilder.App.Interfaces;
-    using TeamBuilder.Data.Repositories;
+    using TeamBuilder.App.Repositories;
 
     public class CreateEventCommand : IExecutable
     {
@@ -62,19 +62,7 @@
                 });
                 uf.Commit();
             }
-
-            //using (TeamBuilderContext ctx = new TeamBuilderContext())
-            //{
-            //    ctx.Events.Add(new Event
-            //    {
-            //        Name = name,
-            //        Description = description,
-            //        StartDate = startDate,
-            //        EndDate = endDate,
-            //        CreatorId = AuthenticationManager.GetCurrentUser().Id
-            //    });
-            //    ctx.SaveChanges();
-            //}
+            
         }
     }
 }

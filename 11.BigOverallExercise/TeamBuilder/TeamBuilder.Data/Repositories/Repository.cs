@@ -1,11 +1,11 @@
-﻿namespace TeamBuilder.Data.Repositories
+﻿namespace TeamBuilder.App.Repositories
 {
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Linq.Expressions;
-    using TeamBuilder.Data.Contracts;
+    using TeamBuilder.App.Contracts;
 
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
@@ -24,6 +24,11 @@
         public void AddRange(IEnumerable<TEntity> entities)
         {
             this.Context.Set<TEntity>().AddRange(entities);
+        }
+
+        public bool Any(Expression<Func<TEntity, bool>> predicate)
+        {
+            return this.Context.Set<TEntity>().Any(predicate);
         }
 
         public void Delete(TEntity entity)
@@ -65,6 +70,16 @@
         {
             return this.Context.Set<TEntity>().Include(v);
         }
+        //public IQueryable<Order> GetAll(params Expression<Func<CandidateTest, object>>[] includeExpressions)
+        //{
+        //    IQueryable<Order> set = _context.Orders;
+
+        //    foreach (var includeExpression in includeExpressions)
+        //    {
+        //        set = set.Include(includeExpression);
+        //    }
+        //    return set;
+        //}
 
         public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate, params string[] navigationProperties)
         {

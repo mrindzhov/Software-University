@@ -7,8 +7,7 @@
     using System.Xml.Linq;
     using TeamBuilder.App.Interfaces;
     using TeamBuilder.App.Utilities;
-    using TeamBuilder.Data;
-    using TeamBuilder.Data.Repositories;
+    using TeamBuilder.App.Repositories;
     using TeamBuilder.Models;
 
     public class ImportUsersCommand : IExecutable

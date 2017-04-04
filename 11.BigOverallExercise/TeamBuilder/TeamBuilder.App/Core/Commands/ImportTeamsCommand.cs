@@ -7,8 +7,7 @@
     using System.Xml.Linq;
     using TeamBuilder.App.Interfaces;
     using TeamBuilder.App.Utilities;
-    using TeamBuilder.Data;
-    using TeamBuilder.Data.Repositories;
+    using TeamBuilder.App.Repositories;
     using TeamBuilder.Models;
 
     public class ImportTeamsCommand : IExecutable
@@ -44,11 +43,6 @@
                 uf.Teams.AddRange(teams);
                 uf.Commit();
             }
-            //using (TeamBuilderContext ctx = new TeamBuilderContext())
-            //{
-            //    ctx.Teams.AddRange(teams);
-            //    ctx.SaveChanges();
-            //}
         }
 
         private ICollection<Team> GetTeamsFromXml(string filePath)

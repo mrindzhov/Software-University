@@ -1,11 +1,9 @@
 ﻿namespace TeamBuilder.App.Core.Commands
 {
-    using System.Linq;
     using Utilities;
-    using Data;
     using Models;
     using TeamBuilder.App.Interfaces;
-    using TeamBuilder.Data.Repositories;
+    using TeamBuilder.App.Repositories;
 
     public class DeleteUserCommand : IExecutable
     {
@@ -30,11 +28,6 @@
                 uf.Users.GetById(u => u.Id == user.Id).IsDeleted = true;
                 uf.Commit();
             }
-            //using (TeamBuilderContext ctx = new TeamBuilderContext())
-            //{
-            //    ctx.Users.SingleOrDefault(u => u.Id == user.Id).IsDeleted = true;
-            //    ctx.SaveChanges();
-            //}
         }
     }
 }

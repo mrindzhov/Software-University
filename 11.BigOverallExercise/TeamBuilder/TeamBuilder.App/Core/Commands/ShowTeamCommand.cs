@@ -3,10 +3,9 @@
     using System;
     using System.Linq;
     using System.Text;
-    using Data;
     using Models;
     using TeamBuilder.App.Interfaces;
-    using TeamBuilder.Data.Repositories;
+    using TeamBuilder.App.Repositories;
     using Utilities;
 
     public class ShowTeamCommand : IExecutable
@@ -37,17 +36,6 @@
                     sb.AppendLine($"--{member.Username}");
                 }
             }
-            //using (TeamBuilderContext ctx = new TeamBuilderContext())
-            //{
-            //    Team team = ctx.Teams.FirstOrDefault(t => t.Name == teamName);
-            //    sb.AppendLine($"{team.Name} {team.Acronym}");
-
-            //    sb.AppendLine($"Members: {team.Members.Count()}");
-            //    foreach (var member in team.Members)
-            //    {
-            //        sb.AppendLine($"--{member.Username}");
-            //    }
-            //}
             return sb.ToString().Trim();
         }
     }

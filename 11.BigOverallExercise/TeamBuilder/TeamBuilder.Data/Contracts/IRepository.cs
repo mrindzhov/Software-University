@@ -1,4 +1,4 @@
-﻿namespace TeamBuilder.Data.Contracts
+﻿namespace TeamBuilder.App.Contracts
 {
     using System;
     using System.Collections.Generic;
@@ -12,6 +12,8 @@
         void AddRange(IEnumerable<TEntity> entities);
 
         void Delete(TEntity entity);
+
+        bool Any(Expression<Func<TEntity, bool>> predicate);
 
         void DeleteRange(IEnumerable<TEntity> entities);
 
@@ -28,6 +30,5 @@
         IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate, params string[] navigationProperties);
 
         IQueryable<TEntity> Include(string v);
-        //IEnumerable<TEntity> Where(IEnumerable<TEntity> source, Func<TEntity, bool> predicate);
     }
 }

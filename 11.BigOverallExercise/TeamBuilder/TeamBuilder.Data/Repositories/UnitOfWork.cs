@@ -1,7 +1,7 @@
-﻿namespace TeamBuilder.Data.Repositories
+﻿namespace TeamBuilder.App.Repositories
 {
     using System.Data.Entity;
-    using TeamBuilder.Data.Contracts;
+    using TeamBuilder.App.Contracts;
     using TeamBuilder.Models;
 
     public class UnitOfWork : IUnitOfWork

@@ -1,4 +1,4 @@
-﻿namespace TeamBuilder.Data.Configurations
+﻿namespace TeamBuilder.App.Configurations
 {
 
     using System.Data.Entity.ModelConfiguration;

@@ -1,10 +1,8 @@
 ﻿namespace TeamBuilder.App.Core.Commands
 {
     using System;
-    using System.Linq;
-    using Data;
     using TeamBuilder.App.Interfaces;
-    using TeamBuilder.Data.Repositories;
+    using TeamBuilder.App.Repositories;
     using TeamBuilder.Models;
     using Utilities;
     public class LoginCommand : IExecutable
@@ -36,10 +34,6 @@
             {
                 return uf.Users.FirstOrDefault(u => u.Username == username && u.Password == password && u.IsDeleted == false);
             }
-            //using (TeamBuilderContext ctx = new TeamBuilderContext())
-            //{
-            //    return ctx.Users.FirstOrDefault(u => u.Username == username && u.Password == password && u.IsDeleted == false);
-            //}
         }
     }
 }

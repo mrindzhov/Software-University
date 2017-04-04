@@ -1,4 +1,4 @@
-﻿namespace TeamBuilder.Data.Contracts
+﻿namespace TeamBuilder.App.Contracts
 {
     using System;
 

@@ -4,8 +4,7 @@
     using System.Linq;
     using Models;
     using TeamBuilder.App.Interfaces;
-    using TeamBuilder.Data;
-    using TeamBuilder.Data.Repositories;
+    using TeamBuilder.App.Repositories;
     using Utilities;
 
     public class AddTeamToCommand : IExecutable
@@ -38,20 +37,6 @@
                 team.ParticipatedEvents.Add(ev);
                 uf.Commit();
             }
-            //using (TeamBuilderContext context = new TeamBuilderContext())
-            //{
-            //    Team team = context.Teams.FirstOrDefault(t => t.Name == teamName);
-            //    Event ev = context.Events.Where(e => e.Name == eventName).OrderByDescending(e => e.StartDate).First();
-
-            //    if (ev.ParticipatingTeams.Any(t => t.Name == teamName) || team.ParticipatedEvents.Any(e => e.Id == ev.Id))
-            //    {
-            //        throw new InvalidOperationException(Constants.ErrorMessages.CannotAddSameTeamTwice);
-            //    }
-
-            //    ev.ParticipatingTeams.Add(team);
-            //    team.ParticipatedEvents.Add(ev);
-            //    context.SaveChanges();
-            //}
         }
     }
 }

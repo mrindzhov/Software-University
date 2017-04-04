@@ -1,11 +1,9 @@
 ﻿namespace TeamBuilder.App.Core.Commands
 {
     using System;
-    using System.Linq;
-    using Data;
     using Models;
     using TeamBuilder.App.Interfaces;
-    using TeamBuilder.Data.Repositories;
+    using TeamBuilder.App.Repositories;
     using Utilities;
 
     public class DisbandCommand : IExecutable
@@ -38,12 +36,6 @@
                 uf.Teams.Delete(team);
                 uf.Commit();
             }
-            //using (TeamBuilderContext ctx = new TeamBuilderContext())
-            //{
-            //    Team team = ctx.Teams.FirstOrDefault(t => t.Name == teamName);
-            //    ctx.Teams.Remove(team);
-            //    ctx.SaveChanges();
-            //}
         }
     }
 }

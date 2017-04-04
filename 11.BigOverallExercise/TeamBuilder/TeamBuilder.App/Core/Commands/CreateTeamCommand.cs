@@ -1,9 +1,8 @@
 ﻿namespace TeamBuilder.App.Core.Commands
 {
     using System;
-    using Data;
     using TeamBuilder.App.Interfaces;
-    using TeamBuilder.Data.Repositories;
+    using TeamBuilder.App.Repositories;
     using Utilities;
 
     public class CreateTeamCommand : IExecutable
@@ -51,17 +50,6 @@
                 });
                 uf.Commit();
             }
-            //using (TeamBuilderContext ctx = new TeamBuilderContext())
-            //{
-            //    ctx.Teams.Add(new Models.Team
-            //    {
-            //        Name = teamName,
-            //        Acronym = acronym,
-            //        Description = description,
-            //        CreatorId = AuthenticationManager.GetCurrentUser().Id
-            //    });
-            //    ctx.SaveChanges();
-            //}
         }
 
     }
