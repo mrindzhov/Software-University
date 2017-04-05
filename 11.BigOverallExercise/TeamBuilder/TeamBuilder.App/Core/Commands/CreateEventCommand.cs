@@ -12,34 +12,25 @@
         //•	CreateEvent<name> <description> <startDate> <endDate>
         public string Execute(string[] args)
         {
-            Validator.CheckLength(6, args);
+            Validator.ValidateLength(6, args);
             AuthenticationManager.Authorize();
 
             string name = args[0];
             string description = args[1];
-
             DateTime startDate;
+            DateTime endDate;
 
             bool IsStartDate = DateTime.TryParseExact(args[2] + " " + args[3],
                 Constants.DateTimeFormat,
                 CultureInfo.InvariantCulture,
                 DateTimeStyles.None, out startDate);
 
-            DateTime endDate;
-
             bool IsEndDate = DateTime.TryParseExact(args[4] + " " + args[5],
                 Constants.DateTimeFormat,
                 CultureInfo.InvariantCulture,
                 DateTimeStyles.None, out endDate);
 
-            if (!IsEndDate || !IsStartDate)
-            {
-                throw new ArgumentException(Constants.ErrorMessages.InvalidDateFormat);
-            }
-            if (startDate > endDate)
-            {
-                throw new ArgumentException("Start date should be before end date.");
-            }
+            Validator.ValidateCreateEventCommand(startDate, endDate, IsStartDate, IsEndDate);
 
             this.CreateEvent(name, description, startDate, endDate);
 
@@ -47,7 +38,6 @@
             return $"Event {name} successfully created!";
 
         }
-
         private void CreateEvent(string name, string description, DateTime startDate, DateTime endDate)
         {
             using (var uf = new UnitOfWork())
@@ -62,7 +52,7 @@
                 });
                 uf.Commit();
             }
-            
+
         }
     }
 }

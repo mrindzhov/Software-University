@@ -9,7 +9,7 @@
     {
         public string Execute(string[] args)
         {
-            Validator.CheckLength(1, args);
+            Validator.ValidateLength(1, args);
             AuthenticationManager.Authorize();
             string teamName = args[0];
             Validator.ValidateInvitation(teamName, AuthenticationManager.GetCurrentUser());

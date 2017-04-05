@@ -13,27 +13,17 @@
         //If the user is actually the creator of the team – add him/her directly!
         public string Execute(string[] args)
         {
-            Validator.CheckLength(2, args);
+            Validator.ValidateLength(2, args);
             AuthenticationManager.Authorize();
             string teamName = args[0];
             string username = args[1];
 
-            if (!CommandHelper.IsTeamExisting(teamName) || !CommandHelper.IsUserExisting(username))
-            {
-                throw new ArgumentException(Constants.ErrorMessages.TeamOrUserNotExist);
-            }
-            if (CommandHelper.IsInvitePending(teamName, username))
-            {
-                throw new InvalidOperationException(Constants.ErrorMessages.InviteIsAlreadySent);
-            }
+            Validator.ValidateAddTeamToCommand(teamName, username);
 
-            if (!CommandHelper.IsCreatorOrPartOfTeam(teamName))
-            {
-                throw new InvalidOperationException(Constants.ErrorMessages.NotAllowed);
-            }
             this.SendInvitation(teamName, username);
             return $"Team {teamName} invited {username}!";
         }
+        
 
         private void SendInvitation(string teamName, string username)
         {

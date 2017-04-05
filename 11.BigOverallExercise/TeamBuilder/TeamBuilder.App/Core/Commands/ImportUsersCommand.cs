@@ -16,7 +16,7 @@
         //Import users from given xml file.
         public string Execute(string[] args)
         {
-            Validator.CheckLength(1, args);
+            Validator.ValidateLength(1, args);
 
             string filePath = args[0];
             if (!File.Exists(filePath))
@@ -61,7 +61,7 @@
                 string lastName = u.Element("last-name")?.Value;
                 int age = Convert.ToInt32(u.Element("age").Value);
                 Gender gender;
-                bool IsGender = Enum.TryParse(Validator.FirstLetterToUpper(u.Element("gender").Value), out gender);
+                bool IsGender = Enum.TryParse(Modifier.FirstLetterToUpper(u.Element("gender").Value), out gender);
                 users.Add(new User
                 {
                     Username = username,

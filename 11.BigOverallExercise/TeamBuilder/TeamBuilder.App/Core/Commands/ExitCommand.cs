@@ -8,7 +8,7 @@
     {
         public string Execute(string[] args)
         {
-            Validator.CheckLength(0, args);
+            Validator.ValidateLength(0, args);
             Console.WriteLine("Bye!");
             Environment.Exit(0);
             return string.Empty;

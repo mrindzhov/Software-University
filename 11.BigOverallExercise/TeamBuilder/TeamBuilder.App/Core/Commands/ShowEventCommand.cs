@@ -3,7 +3,6 @@
     using System;
     using System.Linq;
     using System.Text;
-    using App;
     using Models;
     using TeamBuilder.App.Interfaces;
     using TeamBuilder.App.Repositories;
@@ -13,15 +12,15 @@
     {
         public string Execute(string[] args)
         {
-            Validator.CheckLength(1, args);
+            Validator.ValidateLength(1, args);
 
             string eventName = args[0];
-            if (!CommandHelper.IsEventExisting(eventName))
-            {
-                throw new ArgumentException(string.Format(Constants.ErrorMessages.EventNotFound, eventName));
-            }
+
+            Validator.ValidateShowEventCommand(eventName);
+
             return this.LoadEvent(eventName);
         }
+        
 
         private string LoadEvent(string eventName)
         {

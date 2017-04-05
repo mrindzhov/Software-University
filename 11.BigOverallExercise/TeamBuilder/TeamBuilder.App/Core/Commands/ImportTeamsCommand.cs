@@ -14,7 +14,7 @@
     {
         public string Execute(string[] args)
         {
-            Validator.CheckLength(1, args);
+            Validator.ValidateLength(1, args);
 
             string filePath = args[0];
             if (!File.Exists(filePath))

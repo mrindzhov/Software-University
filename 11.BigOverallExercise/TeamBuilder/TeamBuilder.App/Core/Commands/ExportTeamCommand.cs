@@ -13,14 +13,12 @@
     {
         public string Execute(string[] args)
         {
-            Validator.CheckLength(1, args);
+            Validator.ValidateLength(1, args);
 
             string teamName = args[0];
 
-            if (!CommandHelper.IsTeamExisting(teamName))
-            {
-                throw new ArgumentException(string.Format(Constants.ErrorMessages.TeamNotFound, teamName));
-            }
+            Validator.ValidateExportTeamCommand(teamName);
+
             Team team = this.GetTeamWithMembersByName(teamName);
 
             string path = this.ExportTeam(team);
@@ -28,6 +26,7 @@
             return $"Team {teamName} exported to {path}!";
 
         }
+
 
         private string ExportTeam(Team team)
         {

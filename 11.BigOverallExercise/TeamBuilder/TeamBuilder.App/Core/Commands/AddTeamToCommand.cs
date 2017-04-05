@@ -11,11 +11,11 @@
     {
         public string Execute(string[] inputArgs)
         {
-            Validator.CheckLength(2, inputArgs);
+            Validator.ValidateLength(2, inputArgs);
             AuthenticationManager.Authorize();
             string eventName = inputArgs[0];
             string teamName = inputArgs[1];
-            Validator.ValidateAddTeamToEvent(eventName, teamName, AuthenticationManager.GetCurrentUser().Id);
+            Validator.ValidateAddTeamToEventCommand(eventName, teamName, AuthenticationManager.GetCurrentUser().Id);
             this.AddTeamToEvent(teamName, eventName);
 
             return $"Team {teamName} added to {eventName}!";

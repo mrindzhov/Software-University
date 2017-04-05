@@ -8,7 +8,7 @@
     {
         public string Execute(string[] args)
         {
-            Validator.CheckLength(0, args);
+            Validator.ValidateLength(0, args);
             AuthenticationManager.Authorize();
 
             User currentUser = AuthenticationManager.GetCurrentUser();

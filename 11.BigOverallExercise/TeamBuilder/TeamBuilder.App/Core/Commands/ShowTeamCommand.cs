@@ -12,15 +12,15 @@
     {
         public string Execute(string[] args)
         {
-            Validator.CheckLength(1, args);
+            Validator.ValidateLength(1, args);
 
             string teamName = args[0];
-            if (!CommandHelper.IsTeamExisting(teamName))
-            {
-                throw new ArgumentException(string.Format(Constants.ErrorMessages.TeamNotFound, teamName));
-            }
+
+            Validator.ValidateShowTeamCommand(teamName);
+
             return this.LoadTeamAndMembers(teamName);
         }
+        
 
         private string LoadTeamAndMembers(string teamName)
         {

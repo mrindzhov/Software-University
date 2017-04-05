@@ -9,7 +9,7 @@
     {
         public string Execute(string[] args)
         {
-            Validator.CheckLength(2, args);
+            Validator.ValidateLength(2, args);
             string username = args[0];
             string password = args[1];
             if (AuthenticationManager.IsAuthenticated())

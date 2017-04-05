@@ -1,7 +1,5 @@
 ﻿namespace TeamBuilder.App.Core.Commands
 {
-    using System.Linq;
-    using App;
     using Models;
     using TeamBuilder.App.Interfaces;
     using TeamBuilder.App.Repositories;
@@ -13,9 +11,10 @@
         //Checks current user’s active invites and accepts the one from the team specified.
         public string Execute(string[] args)
         {
-            Validator.CheckLength(1, args);
+            Validator.ValidateLength(1, args);
             AuthenticationManager.Authorize();
             string teamName = args[0];
+
             Validator.ValidateInvitation(teamName, AuthenticationManager.GetCurrentUser());
 
             this.AcceptInvitation(teamName);

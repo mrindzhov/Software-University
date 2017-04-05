@@ -12,52 +12,24 @@
         // •	RegisterUser <username> <password> <repeat-password> <firstName> <lastName> <age> <gender>
         public string Execute(string[] args)
         {
-            Validator.CheckLength(7, args);
+            Validator.ValidateLength(7, args);
             //if (AuthenticationManager.IsAuthenticated())
             //{
             //    throw new InvalidOperationException(Constants.ErrorMessages.LogoutFirst);
             //}
             string username = args[0];
-
-            if (username.Length > Constants.MaxUsernameLength || username.Length < Constants.MinUsernameLength)
-            {
-                throw new ArgumentException(string.Format(Constants.ErrorMessages.UsernameNotValid, username));
-            }
             string password = args[1];
-
-            if (!password.Any(char.IsDigit) || !password.Any(char.IsUpper))
-            {
-                throw new ArgumentException(string.Format(Constants.ErrorMessages.PasswordNotValid, password));
-            }
-
             string repeatPassword = args[2];
-
-            if (password != repeatPassword)
-            {
-                throw new ArgumentException(string.Format(Constants.ErrorMessages.PasswordDoesNotMatch));
-            }
-
             string firstName = args[3];
-
             string lastName = args[4];
             int age;
-            bool isNumber = int.TryParse(args[5], out age);
-
-            if (!isNumber || age <= 0)
-            {
-                throw new ArgumentException(Constants.ErrorMessages.AgeNotValid);
-            }
-
             Gender gender;
-            bool isGenderValid = Enum.TryParse(args[6], out gender);
-            if (!isGenderValid)
-            {
-                throw new ArgumentException(Constants.ErrorMessages.GenderNotValid);
-            }
-            if (CommandHelper.IsUserExisting(username))
-            {
-                throw new InvalidOperationException(string.Format(Constants.ErrorMessages.UsernameIsTaken, username));
-            }
+            bool IsAgeNumber = int.TryParse(args[5], out age);
+            bool isGenderValid = Enum.TryParse(Modifier.FirstLetterToUpper(args[6]), out gender);
+
+            Validator.ValidateRegisterUserCommand(
+                username, password, repeatPassword, age, IsAgeNumber, isGenderValid);
+
             User u = new User
             {
                 Username = username,
@@ -67,12 +39,13 @@
                 Age = age,
                 Gender = gender
             };
+
             this.RegisterUser(u);
             // AuthenticationManager.LoginUser(u);
 
             return $"User {username} successfully registered!";
         }
-
+        
         private void RegisterUser(User user)
         {
             using (var uf = new UnitOfWork())

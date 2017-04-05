@@ -1,6 +1,5 @@
 ﻿namespace TeamBuilder.App.Core.Commands
 {
-    using System;
     using Models;
     using TeamBuilder.App.Interfaces;
     using TeamBuilder.App.Repositories;
@@ -10,23 +9,18 @@
     {
         public string Execute(string[] inputArgs)
         {
-            Validator.CheckLength(1, inputArgs);
+            Validator.ValidateLength(1, inputArgs);
             AuthenticationManager.Authorize();
 
             string teamName = inputArgs[0];
 
-            if (!CommandHelper.IsTeamExisting(teamName))
-            {
-                throw new ArgumentException(string.Format(Constants.ErrorMessages.TeamNotFound, teamName));
-            }
-            if (!CommandHelper.IsCreatorOfTeam(teamName, AuthenticationManager.GetCurrentUser().Username))
-            {
-                throw new InvalidOperationException(Constants.ErrorMessages.NotAllowed);
-            }
+            Validator.ValidateDisbandCommand(teamName);
             this.DisbandTem(teamName);
 
             return $"Team {teamName} was disbaned!";
         }
+
+
 
         private void DisbandTem(string teamName)
         {
