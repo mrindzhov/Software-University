@@ -3,10 +3,19 @@
     using Utilities;
     using Models;
     using TeamBuilder.App.Interfaces;
-    using TeamBuilder.App.Repositories;
+    using TeamBulder.Services;
 
     public class DeleteUserCommand : IExecutable
     {
+        private readonly UserService userService;
+        public DeleteUserCommand() : this(new UserService())
+        {
+        }
+        public DeleteUserCommand(UserService userService)
+        {
+            this.userService = userService;
+        }
+
         public string Execute(string[] args)
         {
             Validator.ValidateLength(0, args);
@@ -14,20 +23,11 @@
 
             User user = AuthenticationManager.GetCurrentUser();
 
-            DeleteUser(user);
+            this.userService.DeleteUser(user);
 
             AuthenticationManager.Logout();
 
             return $"User {user.Username} was deleted successfully!";
-        }
-
-        private static void DeleteUser(User user)
-        {
-            using (var uf = new UnitOfWork())
-            {
-                uf.Users.GetById(u => u.Id == user.Id).IsDeleted = true;
-                uf.Commit();
-            }
         }
     }
 }

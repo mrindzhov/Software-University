@@ -3,12 +3,20 @@
     using System;
     using System.Globalization;
     using Utilities;
-    using Models;
     using TeamBuilder.App.Interfaces;
-    using TeamBuilder.App.Repositories;
+    using TeamBulder.Services;
 
     public class CreateEventCommand : IExecutable
     {
+        private readonly EventService eventService;
+        public CreateEventCommand() : this(new EventService())
+        {
+        }
+        public CreateEventCommand(EventService eventService)
+        {
+            this.eventService = eventService;
+        }
+
         //•	CreateEvent<name> <description> <startDate> <endDate>
         public string Execute(string[] args)
         {
@@ -31,27 +39,9 @@
                 DateTimeStyles.None, out endDate);
 
             Validator.ValidateCreateEventCommand(startDate, endDate, IsStartDate, IsEndDate);
-
-            this.CreateEvent(name, description, startDate, endDate);
-
+            this.eventService.CreateEvent(name, description, startDate, endDate, AuthenticationManager.GetCurrentUser().Id);
 
             return $"Event {name} successfully created!";
-
-        }
-        private void CreateEvent(string name, string description, DateTime startDate, DateTime endDate)
-        {
-            using (var uf = new UnitOfWork())
-            {
-                uf.Events.Add(new Event
-                {
-                    Name = name,
-                    Description = description,
-                    StartDate = startDate,
-                    EndDate = endDate,
-                    CreatorId = AuthenticationManager.GetCurrentUser().Id
-                });
-                uf.Commit();
-            }
 
         }
     }

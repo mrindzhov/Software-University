@@ -1,12 +1,19 @@
 ﻿namespace TeamBuilder.App.Core.Commands
 {
-    using Models;
     using TeamBuilder.App.Interfaces;
-    using TeamBuilder.App.Repositories;
+    using TeamBulder.Services;
     using Utilities;
 
     public class AcceptInviteCommand : IExecutable
     {
+        private readonly InvitationService invitationService;
+        public AcceptInviteCommand() : this(new InvitationService())
+        {
+        }
+        public AcceptInviteCommand(InvitationService invitationService)
+        {
+            this.invitationService = invitationService;
+        }
         //•	AcceptInvite <teamName> 
         //Checks current user’s active invites and accepts the one from the team specified.
         public string Execute(string[] args)
@@ -17,25 +24,10 @@
 
             Validator.ValidateInvitation(teamName, AuthenticationManager.GetCurrentUser());
 
-            this.AcceptInvitation(teamName);
+            this.invitationService.AcceptInvitation(teamName, AuthenticationManager.GetCurrentUser());
 
             return $"User {AuthenticationManager.GetCurrentUser().Username} joined team {teamName}!";
 
-        }
-        private void AcceptInvitation(string teamName)
-        {
-            using (var uf = new UnitOfWork())
-            {
-                int currentUserId = AuthenticationManager.GetCurrentUser().Id;
-                User user = uf.Users.GetById(u => u.Id == currentUserId);
-                Team team = uf.Teams.GetByName(t => t.Name == teamName);
-                user.Teams.Add(team);
-                uf.Invitations
-                    .FirstOrDefault(i => i.TeamId == team.Id && i.InvitedUserId == user.Id && i.IsActive)
-                    .IsActive = false;
-                uf.Commit();
-            }
-            
         }
     }
 }

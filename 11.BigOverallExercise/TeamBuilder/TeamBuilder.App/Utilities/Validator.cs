@@ -1,6 +1,7 @@
 ﻿namespace TeamBuilder.App.Utilities
 {
     using System;
+    using System.IO;
     using System.Linq;
     using TeamBuilder.App.Core;
     using TeamBuilder.Models;
@@ -25,6 +26,23 @@
             if (!CommandHelper.IsInviteExisting(teamName, user))
             {
                 throw new ArgumentException(string.Format(Constants.ErrorMessages.InviteNotFound, teamName));
+            }
+        }
+
+        public static void ValidateLogin()
+        {
+            if (AuthenticationManager.IsAuthenticated())
+            {
+                throw new InvalidOperationException(Constants.ErrorMessages.LogoutFirst);
+            }
+
+        }
+
+        public static void ValidatePath(string filePath)
+        {
+            if (!File.Exists(filePath))
+            {
+                throw new FileNotFoundException(string.Format(Constants.ErrorMessages.FileNotFound, filePath));
             }
         }
 
@@ -110,7 +128,7 @@
                 throw new InvalidOperationException(Constants.ErrorMessages.NotAllowed);
             }
         }
-        
+
         public static void ValidateExportTeamCommand(string teamName)
         {
             if (!CommandHelper.IsTeamExisting(teamName))

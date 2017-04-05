@@ -10,7 +10,7 @@
         //{
         //    this.dbContext = dbC;
         //}
-        private readonly DbContext dbContext=new TeamBuilderContext();
+        private readonly DbContext dbContext = new TeamBuilderContext();
 
         protected DbContext DbContext => dbContext;
 
@@ -24,34 +24,20 @@
 
         public virtual IRepository<Event> Events
         {
-            get
-            {
-                return events ?? (this.events = new Repository<Event>(this.dbContext));
-            }
+            get { return events ?? (this.events = new Repository<Event>(this.dbContext)); }
         }
         public virtual IRepository<User> Users
         {
-            get
-            {
-                return users ?? (this.users = new Repository<User>(this.dbContext));
-            }
+            get { return users ?? (this.users = new Repository<User>(this.dbContext)); }
         }
         public virtual IRepository<Team> Teams
         {
-            get
-            {
-                return teams ?? (this.teams = new Repository<Team>(this.dbContext));
-            }
+            get { return teams ?? (this.teams = new Repository<Team>(this.dbContext)); }
         }
         public virtual IRepository<Invitation> Invitations
         {
-            get
-            {
-                return invitations ?? (this.invitations = new Repository<Invitation>(this.dbContext));
-            }
+            get { return invitations ?? (this.invitations = new Repository<Invitation>(this.dbContext)); }
         }
-
-
 
         protected virtual void ConfigureContext(DbContext dbContext)
         {
@@ -67,7 +53,7 @@
 
         public void Commit()
         {
-            this.DbContext.SaveChanges();
+            this.dbContext.SaveChanges();
         }
     }
 }

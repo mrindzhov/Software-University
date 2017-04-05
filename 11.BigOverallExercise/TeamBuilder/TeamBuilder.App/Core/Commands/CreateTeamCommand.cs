@@ -1,11 +1,19 @@
 ﻿namespace TeamBuilder.App.Core.Commands
 {
     using TeamBuilder.App.Interfaces;
-    using TeamBuilder.App.Repositories;
+    using TeamBulder.Services;
     using Utilities;
 
     public class CreateTeamCommand : IExecutable
     {
+        private readonly TeamService teamService;
+        public CreateTeamCommand() : this(new TeamService())
+        {
+        }
+        public CreateTeamCommand(TeamService teamService)
+        {
+            this.teamService = teamService;
+        }
         //•	CreateTeam<name> <acronym> <description>
         public string Execute(string[] args)
         {
@@ -16,29 +24,8 @@
 
             Validator.ValidateCreateTeamCommand(args, teamName, acronym);
 
-
-            this.AddTeam(teamName, acronym, description);
+            this.teamService.AddTeam(teamName, acronym, description, AuthenticationManager.GetCurrentUser().Id);
             return $"Team {teamName} successfully created!";
-
         }
-
-
-
-        private void AddTeam(string teamName, string acronym, string description)
-        {
-
-            using (var uf = new UnitOfWork())
-            {
-                uf.Teams.Add(new Models.Team
-                {
-                    Name = teamName,
-                    Acronym = acronym,
-                    Description = description,
-                    CreatorId = AuthenticationManager.GetCurrentUser().Id
-                });
-                uf.Commit();
-            }
-        }
-
     }
 }

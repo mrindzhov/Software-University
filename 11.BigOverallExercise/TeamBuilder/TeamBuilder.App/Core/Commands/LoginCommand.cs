@@ -2,22 +2,26 @@
 {
     using System;
     using TeamBuilder.App.Interfaces;
-    using TeamBuilder.App.Repositories;
     using TeamBuilder.Models;
+    using TeamBulder.Services;
     using Utilities;
     public class LoginCommand : IExecutable
     {
+        private readonly UserService userService;
+        public LoginCommand() : this(new UserService())
+        {
+        }
+        public LoginCommand(UserService userService)
+        {
+            this.userService = userService;
+        }
         public string Execute(string[] args)
         {
             Validator.ValidateLength(2, args);
             string username = args[0];
             string password = args[1];
-            if (AuthenticationManager.IsAuthenticated())
-            {
-                throw new InvalidOperationException(Constants.ErrorMessages.LogoutFirst);
-            }
-            User user = this.GetUserByCredentials(username, password);
-
+            Validator.ValidateLogin();
+            User user = this.userService.GetUserByCredentials(username, password);
             if (user == null)
             {
                 throw new ArgumentException(Constants.ErrorMessages.UserOrPasswordIsInvalid);
@@ -26,14 +30,6 @@
 
             return $"User {user.Username} successfully logged in!";
 
-        }
-
-        private User GetUserByCredentials(string username, string password)
-        {
-            using (var uf = new UnitOfWork())
-            {
-                return uf.Users.FirstOrDefault(u => u.Username == username && u.Password == password && u.IsDeleted == false);
-            }
         }
     }
 }

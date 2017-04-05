@@ -79,6 +79,7 @@
     <Compile Include="Utilities\CommandHelper.cs" />
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\Modifier.cs" />
+    <Compile Include="Utilities\DataLoader.cs" />
     <Compile Include="Utilities\Validator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +94,10 @@
     <ProjectReference Include="..\TeamBuilder.Models\TeamBuilder.Models.csproj">
       <Project>{53AFE10E-4CB8-4A8B-8D45-15B6C3CB45F0}</Project>
       <Name>TeamBuilder.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeamBulder.Services\TeamBulder.Services.csproj">
+      <Project>{5BD5B224-909B-425D-8C4B-DB9DF676B55D}</Project>
+      <Name>TeamBulder.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

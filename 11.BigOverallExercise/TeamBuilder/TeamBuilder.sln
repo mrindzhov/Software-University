@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamBuilder.Data", "TeamBuilder.Data\TeamBuilder.Data.csproj", "{2BFFF830-26F7-433F-94CB-1A6548ABDDE4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamBuilder.App", "TeamBuilder.App\TeamBuilder.App.csproj", "{64C6AC77-8E10-4357-9C00-36DEAF2EDE27}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamBuilder.Models", "TeamBuilder.Models\TeamBuilder.Models.csproj", "{53AFE10E-4CB8-4A8B-8D45-15B6C3CB45F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamBulder.Services", "TeamBulder.Services\TeamBulder.Services.csproj", "{5BD5B224-909B-425D-8C4B-DB9DF676B55D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{53AFE10E-4CB8-4A8B-8D45-15B6C3CB45F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53AFE10E-4CB8-4A8B-8D45-15B6C3CB45F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53AFE10E-4CB8-4A8B-8D45-15B6C3CB45F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BD5B224-909B-425D-8C4B-DB9DF676B55D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BD5B224-909B-425D-8C4B-DB9DF676B55D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BD5B224-909B-425D-8C4B-DB9DF676B55D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BD5B224-909B-425D-8C4B-DB9DF676B55D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

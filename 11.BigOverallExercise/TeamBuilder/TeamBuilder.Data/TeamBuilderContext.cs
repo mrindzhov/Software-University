@@ -11,9 +11,7 @@ namespace TeamBuilder.App
         {
             //Database.SetInitializer(new DropCreateDatabaseAlways<TeamBuilderContext>());
         }
-
-
-
+        
         public virtual DbSet<User> Users { get; set; }
 
         public virtual DbSet<Event> Events { get; set; }

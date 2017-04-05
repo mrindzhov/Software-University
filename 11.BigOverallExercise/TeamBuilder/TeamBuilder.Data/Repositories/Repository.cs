@@ -70,17 +70,6 @@
         {
             return this.Context.Set<TEntity>().Include(v);
         }
-        //public IQueryable<Order> GetAll(params Expression<Func<CandidateTest, object>>[] includeExpressions)
-        //{
-        //    IQueryable<Order> set = _context.Orders;
-
-        //    foreach (var includeExpression in includeExpressions)
-        //    {
-        //        set = set.Include(includeExpression);
-        //    }
-        //    return set;
-        //}
-
         public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate, params string[] navigationProperties)
         {
             IEnumerable<TEntity> list;
@@ -95,10 +84,5 @@
             }
             return list.AsQueryable();
         }
-
-        //public IEnumerable<TEntity> Where(IEnumerable<TEntity> source, Func<TEntity, bool> predicate)
-        //{
-        //    return this.Context.Set<TEntity>().Where(predicate);
-        //}
     }
 }

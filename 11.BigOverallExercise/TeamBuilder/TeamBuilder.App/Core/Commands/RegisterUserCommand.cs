@@ -2,21 +2,25 @@
 {
     using System;
     using Utilities;
-    using System.Linq;
     using Models;
     using TeamBuilder.App.Interfaces;
-    using TeamBuilder.App.Repositories;
+    using TeamBulder.Services;
 
     public class RegisterUserCommand : IExecutable
     {
+        private readonly UserService userService;
+        public RegisterUserCommand() : this(new UserService())
+        {
+
+        }
+        public RegisterUserCommand(UserService userService)
+        {
+            this.userService = userService;
+        }
         // •	RegisterUser <username> <password> <repeat-password> <firstName> <lastName> <age> <gender>
         public string Execute(string[] args)
         {
             Validator.ValidateLength(7, args);
-            //if (AuthenticationManager.IsAuthenticated())
-            //{
-            //    throw new InvalidOperationException(Constants.ErrorMessages.LogoutFirst);
-            //}
             string username = args[0];
             string password = args[1];
             string repeatPassword = args[2];
@@ -39,21 +43,10 @@
                 Age = age,
                 Gender = gender
             };
-
-            this.RegisterUser(u);
+            this.userService.RegisterUser(u);
             // AuthenticationManager.LoginUser(u);
 
             return $"User {username} successfully registered!";
         }
-        
-        private void RegisterUser(User user)
-        {
-            using (var uf = new UnitOfWork())
-            {
-                uf.Users.Add(user);
-                uf.Commit();
-            }
-        }
-
     }
 }
