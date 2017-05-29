@@ -1,4 +1,5 @@
 ﻿using AlgoComplexityAndLinearDS.Exercises;
+using AlgoComplexityAndLinearDS.Exercises.DistanceInLabyrinth;
 
 namespace AlgoComplexityAndLinearDS
 {
@@ -11,7 +12,7 @@ namespace AlgoComplexityAndLinearDS
             //LongestSubsequence.Run();
             //RemoveOddOccurrences.Run();
             //CountOfOccurrences.Run();
-            ReversedList.Run();
+            DistanceInLabyrinth.Run();
         }
 
     }

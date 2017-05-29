@@ -7,7 +7,17 @@ namespace AlgoComplexityAndLinearDS.Exercises
     public class ReversedList<T> : IEnumerable<T>
     {
         public int Count { get; private set; }
-        public int Capacity { get; private set; }
+        public int Capacity
+        {
+            get
+            {
+                return this.items.Length;
+            }
+            private set
+            {
+                this.Capacity = value;
+            }
+        }
         private T[] items;
 
         public ReversedList()
@@ -21,23 +31,23 @@ namespace AlgoComplexityAndLinearDS.Exercises
             get
             {
                 ValidateRange(index);
-                T[] reversedArr = reversedGetReversedArray(items);
+                T[] reversedArr = GetReversedArray(items);
                 return reversedArr[index];
             }
             set
             {
                 ValidateRange(index);
-                T[] reversedArr = reversedGetReversedArray(items);
+                T[] reversedArr = GetReversedArray(items);
                 reversedArr[index] = value;
             }
         }
 
-        private T[] reversedGetReversedArray(T[] items)
+        private T[] GetReversedArray(T[] items)
         {
-            T[] reversed = new T[this.items.Length];
-            Array.Copy(items, reversed, this.items.Length);
-            Array.Reverse(reversed);
-            return reversed;
+            T[] newArr = new T[this.items.Length];
+            Array.Copy(items, newArr, this.items.Length);
+            Array.Reverse(newArr);
+            return newArr;
         }
 
         public void Add(T item)
@@ -49,11 +59,10 @@ namespace AlgoComplexityAndLinearDS.Exercises
             this.items[this.Count++] = item;
         }
 
-
         public T RemoveAt(int index)
         {
             ValidateRange(index);
-            T[] reversedArr = reversedGetReversedArray(items);
+            T[] reversedArr = GetReversedArray(items);
             T element = reversedArr[index];
             this.items[index] = default(T);
             this.Shift(index);
@@ -71,13 +80,17 @@ namespace AlgoComplexityAndLinearDS.Exercises
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            for (int i = items.Length - 1; i >= 0; i--)
+            {
+                yield return items[i];
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return this.GetEnumerator();
         }
+
         private void Resize()
         {
             T[] copy = new T[this.items.Length * 2];
@@ -90,7 +103,7 @@ namespace AlgoComplexityAndLinearDS.Exercises
 
         private void ValidateRange(int index)
         {
-            if (index >= this.Count)
+            if (index >= this.Count && index < 0)
             {
                 throw new ArgumentOutOfRangeException();
             }
