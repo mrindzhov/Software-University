@@ -154,8 +154,8 @@ public class BinarySearchTree<T> where T : IComparable<T>
         // if 1 => there is right child bigger than the endIndex
         int upperBound = endRange.CompareTo(node.Value);
 
-        bool hasLeftChild= lowerBound < 0;
-        bool hasRightChild= lowerBound > 0;
+        bool hasLeftChild = lowerBound < 0;
+        bool hasRightChild = lowerBound > 0;
         bool hasNoSmallerAndBiggerChildIn = lowerBound <= 0 && upperBound >= 0;
 
 

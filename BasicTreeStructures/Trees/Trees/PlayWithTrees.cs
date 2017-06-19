@@ -19,7 +19,6 @@ public class PlayWithTrees
 
         // Act
         Console.WriteLine(string.Join(" ", bst.Range(4, 37)));
-        return;
         //BinarySearchTree<int> bst = new BinarySearchTree<int>();
         //bst.Insert(10);
         //bst.Insert(30);
