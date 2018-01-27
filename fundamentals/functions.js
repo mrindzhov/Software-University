@@ -5,7 +5,7 @@ function cookingByNums(arr) {
     dice: (num) => Math.sqrt(num),
     spice: (num) => ++num,
     bake: (num) => num * 3,
-    fillet: (num) => num -= num * 0.2
+    fillet: (num) => num * 0.8
   }
 
   for (let idx = 1; idx < arr.length; idx++) {
@@ -86,32 +86,23 @@ function shapeCrystals(arr) {
 let crystals = [1000, 4000, 8100]
 shapeCrystals(crystals)
 
-function printDna(n) {
-  let structure = 'ATCGTTAGGG'
-  let max = 10
-  let sIndex = -1
-  for (let i = 1; i <= n; i++) {
-    let char1 = structure.charAt(getIndex())
-    let char2 = structure.charAt(getIndex())
-    if (i % 4 === 1) {
-      console.log(`**${char1}${char2}**`)
-    } else if (i % 4 === 2 || i % 4 === 0) {
-      console.log(`*${char1}--${char2}*`)
-    } else {
-      console.log(`${char1}----${char2}`)
-    }
+function generateDna(n) {
+  let dnaTypes = ['AT', 'CG', 'TT', 'AG', 'GG'];
+  let printDna = {
+    0: x => console.log(`**${x}**`),
+    1: x => console.log(`*${x[0]}--${x[1]}*`),
+    2: x => console.log(`${x[0]}----${x[1]}`)
   }
 
-  function getIndex() {
-    sIndex += 1
-    if (sIndex === max) {
-      sIndex = 0
-    }
-
-    return sIndex
+  for (let i = 0; i < n; i++) {
+    let operationId = i % 4;
+    let index = i % dnaTypes.length;
+    let sequence = dnaTypes[index];
+    operationId = operationId == 3 ? 1 : operationId
+    printDna[operationId](sequence)
   }
 }
-printDna(5)
+generateDna(10)
 
 function distanceIsValid(nums) {
   let x0 = 0
