@@ -327,3 +327,7 @@ ASALocalRun/
 *.nvuser
 
 # MFractors (Xamarin productivity tool) working foldew
+
+node_modules/
+.vscode/
+.idea/
