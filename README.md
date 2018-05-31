@@ -36,6 +36,9 @@ https://softuni.bg/trainings/1550/databases-basics-ms-sql-server-january-2017
 =======
 # JavaAdvanced
 
+Java Advanced Course Exercises 100 % Solved
+
+https://softuni.bg/trainings/1531/java-advanced-january-2017
 =======
 # JS Core - January 2018 @ SoftUni
 
