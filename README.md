@@ -15,6 +15,13 @@ https://softuni.bg/trainings/1447/js-fundamentals-september-2016
 (JavaScript Core, Part 2)
 
 https://softuni.bg/trainings/1486/js-advanced-october-2016
+=======
+# JS-Applications- November 2016 @ SoftUni
+
+(JavaScript Core, Part 3)
+
+https://softuni.bg/trainings/1505/js-applications-november-2016
+=======
 # Databases-Advanced-Entity-Framework February 2017 @ SoftUni
 
 (C# DB Fundamentals, Part 2)
