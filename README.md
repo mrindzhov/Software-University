@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Software-University-Courses
 =======
 # Software Technologies - June 2016 @ SoftUni
@@ -15,6 +16,12 @@ https://softuni.bg/trainings/1447/js-fundamentals-september-2016
 (C# DB Fundamentals, Part 2)
 
 https://softuni.bg/trainings/1529/databases-advanced-entity-framework-february-2017
+=======
+# Databases-Basics
+  
+C# DB Fundamentals: Databases Basics - MS SQL Server - January 2017 @ SoftUni
+
+https://softuni.bg/trainings/1550/databases-basics-ms-sql-server-january-2017
 =======
 # JavaAdvanced
 
