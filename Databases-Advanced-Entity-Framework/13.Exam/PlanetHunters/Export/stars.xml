@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Stars>
+  <Star>
+    <Name>Trappist-1</Name>
+    <Temeperature>2550</Temeperature>
+    <StarSystem>Trappist-1</StarSystem>
+    <DiscoveryInfo DiscoveryDate="26.4.2000 г." TelescopeName="TRAPPIST" />
+  </Star>
+  <Star>
+    <Name>Proxima Centauri</Name>
+    <Temeperature>3042</Temeperature>
+    <StarSystem>Alpha Centauri</StarSystem>
+    <DiscoveryInfo DiscoveryDate="12.10.1915 г." TelescopeName="Union Observatory" />
+  </Star>
+  <Star>
+    <Name>Wolf 1061</Name>
+    <Temeperature>3305</Temeperature>
+    <StarSystem>Wolf 1061</StarSystem>
+    <DiscoveryInfo DiscoveryDate="1.1.1919 г." TelescopeName="Heidelberg-Koenigstuhl State Observatory" />
+  </Star>
+  <Star>
+    <Name>Kepler-413A</Name>
+    <Temeperature>4700</Temeperature>
+    <StarSystem>Kepler-413</StarSystem>
+    <DiscoveryInfo DiscoveryDate="28.1.2014 г." TelescopeName="Kepler" />
+  </Star>
+  <Star>
+    <Name>Kepler-413B</Name>
+    <Temeperature>3590</Temeperature>
+    <StarSystem>Kepler-413</StarSystem>
+    <DiscoveryInfo DiscoveryDate="28.1.2014 г." TelescopeName="Kepler" />
+  </Star>
+</Stars>
