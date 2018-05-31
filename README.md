@@ -1,4 +1,8 @@
-# Software-University
+# Software-University-Courses
+=======
+# Software Technologies - June 2016 @ SoftUni
+
+https://softuni.bg/trainings/1390/software-technologies-june-2016
 =======
 # JS Fundamentals - September 2016 @ SoftUni
 
@@ -12,7 +16,6 @@ https://softuni.bg/trainings/1447/js-fundamentals-september-2016
 
 https://softuni.bg/trainings/1529/databases-advanced-entity-framework-february-2017
 =======
-# Software Technologies - June 2016 @ SoftUni
+# JavaAdvanced
 
-https://softuni.bg/trainings/1390/software-technologies-june-2016
 =======
